@@ -1,0 +1,114 @@
+<HTML>
+<HEAD><TITLE>Multi-Picker Demo 1</TITLE>
+<script language="JavaScript">
+function fAddListItem(strDate) {
+	var dl=document.testForm.dateList;
+	dl.options[dl.options.length]=new Option(strDate,strDate);
+}
+function fRemoveListItem(strDate) {
+	var dl=document.testForm.dateList;
+	for (var i=0;i<dl.options.length;i++)
+		if (strDate==dl.options[i].value) break;
+	dl.options[i]=null;
+}
+// The above 2 functions are called from within the plugins1.js when adding dates into the selected ranges. We use them to add dates explicitly to the <select> list.
+// These 2 have to be defined in the same page with the <select> tag, otherwise a bug of IE5.0 will prevent the list from getting new options. IE5.5+ doesn't have this bug.
+// param strDate has a format of yyyy/mm/dd, you may modify this format in function fDateString in the plugins1.js
+
+function submitByDates(fm) {	// construct the selected dates in the hidden form field allSelected
+	fm.allSelected.value="";
+	for (var i=0; i<fm.dateList.length; i++) {
+		if (i>0) fm.allSelected.value+=",";
+		fm.allSelected.value+=fm.dateList.options[i].value;
+	}
+	 fm.action="ByDate.php";
+	 fm.method="post";
+	 fm.submit();
+	//alert(fm.allSelected.value); // in your app you should call fm.submit() instead so that the allSelected.value can be submitted.
+}
+
+function submitByRanges(fm) {	// construct the selected date ranges in the hidden form field allSelected
+	fm.allSelected.value="";
+	for (var i=0; i<gfFlat._pds.length; i++) {
+		var d0=new Date(gfFlat._pds[i][0]);
+		var d1=new Date(gfFlat._pds[i][1]);
+		fm.allSelected.value+="["+d0.getUTCFullYear()+"/"+(d0.getUTCMonth()+1)+"/"+d0.getUTCDate()
+			+","
+			+d1.getUTCFullYear()+"/"+(d1.getUTCMonth()+1)+"/"+d1.getUTCDate()+"]";
+	}
+	// fm.action="ByRange.php";
+	alert(fm.allSelected.value); // in your app you should call fm.submit() instead so that the allSelected.value can be submitted.
+}
+</script>
+</HEAD>
+<BODY bgcolor="#dcdcdc">
+
+<h3>This demo uses the plugins1.js</h3>
+
+
+
+<form name="testForm">
+<table>
+<tr>
+<td valign=top>
+<!--  FlatCalendar Tags (tag name and id must match), note it's using plugins1.js -->
+<iframe width=174 height=189 name="gToday:normal:agenda.js:gfFlat:plugins1.js" id="gToday:normal:agenda.js:gfFlat:plugins1.js" src="iflateng.htm" scrolling="no" frameborder="0">
+</iframe>
+</td>
+<td nowrap>&nbsp;&nbsp;
+<select name="dateList" size="9">
+<option value="-">-----------------</option>
+</select><BR>
+<script language="JavaScript">
+document.testForm.dateList.options[0]=null; // remove the "-------" line. this is a trick to expand the listbox width in NN4.
+</script>
+&nbsp;&nbsp;&nbsp;<input type="button" value="Clear All" onclick="gfFlat.fClearAll();gfFlat.fRepaint();return false;">
+</td>
+</tr>
+</table>
+<input type="Button" value="Submit By Dates" onclick="submitByDates(this.form)">
+<input type="Button" value="Submit By Ranges" onclick="submitByRanges(this.form)">
+<input type="hidden" name="allSelected">
+</form>
+
+
+
+
+<UL>
+  <LI>The multi-select capability implemented in plugins1.js is a demo 
+    to show the great potentials of the calendar. You may modify it to suit your 
+    own needs. 
+  <LI>Click on any date to select it into the list; click on any selected date 
+    to remove it from the list. Click on the DoW (day of week) will select the 
+	whole day column of current month.
+  <LI>Holding the Shift, Ctrl or Alt key to select/remove multiple dates by 
+    range.
+  <LI>Hit and drag on the dates to select range, right-click to deselect range. 
+  <LI>Dragging is supported on IE4+(except Mac), NS6+, Mozilla, Safari and Konqueror3+. 
+  <LI>To submit the selected dates to the server end, you could either 
+    <OL>
+      <LI>Submit all dates individually by concatenate the dates in the list field and assign the result into a hidden form field; 
+      <LI>Or, submit date ranges by utilizing the _pds array inside the plugin. 
+    </OL>
+	Please check out the submitByDates() and submitByRanges() javascript functions in this page. We also included 2 php source examples
+	(ByDate.php and ByRange.php) for how to retrieve the submitted values in the server end.
+  <LI>To initialize a calendar with selected dates retrieved from server end, you should first follow the agenda 
+    tutorial to create a dynamically generated agenda page (using ASP/JSP or whatever cgi). But 
+	instead of generating fAddEvent() calls, you should 
+    <OL>
+      <LI>generate a fAddRange(y,m,d,false) call for each date you retrieved from back-end;
+      <LI>Or, generate a fAddRange(y,m,d,false) for the start date of a range, and followed by a fAddRange(y,m,d,true) for the end date of the range.
+        Looping through all ranges and generating calls in the same pattern.
+    </OL>
+</UL>
+
+  <hr size="1">
+  <div align="right"><font size=-2><em>Copyright&copy; 2003-2004 Idemfactor Solutions, 
+    Inc. All rights reserved.</em></font></div>
+
+
+
+
+
+</BODY>
+</HTML>

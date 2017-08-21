@@ -1,0 +1,500 @@
+.x15
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:general;
+	vertical-align:bottom;
+}
+.x22
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:general;
+	vertical-align:bottom;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:none;
+	border-left:none;
+}
+.x23
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:general;
+	vertical-align:bottom;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:none;
+}
+.x24
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:general;
+	vertical-align:bottom;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:none;
+}
+.x25
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:general;
+	vertical-align:bottom;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+}
+.x26
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:general;
+	vertical-align:bottom;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+}
+.x27
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:700;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:center;
+	vertical-align:bottom;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid windowtext;
+}
+.x28
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:600;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial";
+	text-align:center;
+	vertical-align:bottom;
+	border:.5pt solid windowtext;
+}
+.x29
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:center;
+	vertical-align:bottom;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:none;
+	border-left:none;
+}
+.x30
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:600;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:center;
+	vertical-align:bottom;
+}
+
+.x31
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:general;
+	vertical-align:bottom;
+	border-top:none;
+	border-right:none;
+	border-bottom:none;
+	border-left:.5pt solid windowtext;
+}
+.x32
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:general;
+	vertical-align:bottom;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:.5pt solid windowtext;
+}
+.x33
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:600;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:general;
+	vertical-align:bottom;
+	border-top:none;
+	border-right:none;
+	border-bottom:.5pt solid windowtext;
+	border-left:none;
+}
+.x34
+	{
+	padding-top: 1px;
+	padding-right: 1px;
+	padding-left: 1px;
+	color: windowtext;
+	font-size: 11.0px;
+	font-weight: 400;
+	font-style: normal;
+	text-decoration: none;
+	font-family: "MS Sans Serif", Geneva, sans-serif;
+	text-align: right;
+	vertical-align: bottom;
+	border-top: .5pt solid windowtext;
+	border-right: .5pt solid windowtext;
+	border-bottom: .5pt solid windowtext;
+	border-left: none;
+}
+.x35
+	{
+	padding-top: 1px;
+	padding-right: 1px;
+	padding-left: 1px;
+	color: windowtext;
+	font-size: 11.0px;
+	font-weight: 600;
+	font-style: normal;
+	text-decoration: none;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-align: left;
+	vertical-align: bottom;
+	border-top: none;
+	border-right: none;
+	border-bottom: .5pt solid windowtext;
+	border-left: none;
+}
+.x36
+	{
+	padding-top: 1px;
+	padding-right: 10%;
+	padding-left: 1px;
+	color: windowtext;
+	font-size: 11.0px;
+	font-weight: 400;
+	font-style: normal;
+	text-decoration: none;
+	font-family: "MS Sans Serif", Geneva, sans-serif;
+	text-align: right;
+	vertical-align: bottom;
+	border-top: .5pt solid windowtext;
+	border-right: none;
+	border-bottom: .5pt solid windowtext;
+	border-left: none;
+}
+.x37
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:11.0px;
+	font-weight:600;
+	font-style:normal;
+	text-decoration:none;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-align:center;
+	vertical-align:bottom;
+}
+.x38
+	{
+	padding-top: 1px;
+	padding-right: 10%;
+	padding-left: 1px;
+	color: windowtext;
+	font-size: 11.0px;
+	font-weight: 600;
+	font-style: normal;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: right;
+	vertical-align: bottom;
+	border-top: none;
+	border-right: none;
+	border-bottom: .5pt solid windowtext;
+	border-left: none;
+}
+.x39
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:600;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:center;
+	vertical-align:bottom;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:none;
+	border-left:none;
+}
+.x40
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:right;
+	vertical-align:bottom;
+}
+.x42
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:700;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:general;
+	vertical-align:bottom;
+}
+.x43
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:700;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:left;
+	vertical-align:bottom;
+}
+.x44
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:600;
+	font-style:normal;
+	text-decoration:none;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-align:right;
+	vertical-align:bottom;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:none;
+	border-left:.5pt solid windowtext;
+}
+.x45
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:700;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:center;
+	vertical-align:bottom;
+	border:.5pt solid windowtext;
+	background: #99CCFF;
+}
+.x46
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:700;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:center;
+	vertical-align:middle;
+	border:.5pt solid windowtext;
+	background: #99CCFF;
+}
+.x48
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:700;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:center;
+	vertical-align:middle;
+	border-top:.5pt solid windowtext;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:.5pt solid windowtext;
+}
+.x49
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:700;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:center;
+	vertical-align:middle;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:.5pt solid windowtext;
+	background: #99CCFF;
+}
+.x50
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:general;
+	vertical-align:bottom;
+	border-top:.5pt solid windowtext;
+	border-right:none;
+	border-bottom:none;
+	border-left:.5pt solid windowtext;
+}
+.x51
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:600;
+	font-style:normal;
+	text-decoration:none;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-align:right;
+	vertical-align:bottom;
+	border-top:none;
+	border-right:none;
+	border-bottom:none;
+	border-left:.5pt solid windowtext;
+}
+.x52
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:600;
+	font-style:normal;
+	text-decoration:none;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-align:right;
+	vertical-align:bottom;
+	border-top:none;
+	border-right:.5pt solid windowtext;
+	border-bottom:none;
+	border-left:none;
+	}
+
+#load{
+	position: absolute;
+	text-align:center;
+	z-index:5;
+}
+#loadmsg {
+	font-weight:bold;
+	font-size:8pt;
+	color:#aaaaff;
+}
+#bar {
+	border-width:0;
+	background-color:#eeeeee
+}

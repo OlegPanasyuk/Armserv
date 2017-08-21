@@ -1,0 +1,86 @@
+.x15
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:general;
+	vertical-align:bottom;
+}
+.x22
+	{
+	padding-top: 1px;
+	padding-right: 1px;
+	padding-left: 1px;
+	color: windowtext;
+	font-size: 12.0px;
+	font-weight: 600;
+	font-style: normal;
+	text-decoration: none;
+	font-family: "Arial Cyr";
+	text-align: center;
+	vertical-align: middle;
+	border: .5pt solid windowtext;
+	background: #99CCFF;
+}
+.x23
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:600;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:center;
+	vertical-align:middle;
+	border:.5pt solid windowtext;
+	background:#99CCFF;
+}
+.x24
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:general;
+	vertical-align:bottom;
+	border:.5pt solid windowtext;
+}
+.x25
+	{padding-top:1px;
+	padding-right:1px;
+	padding-left:1px;
+	color:windowtext;
+	font-size:12.0px;
+	font-weight:400;
+	font-style:normal;
+	text-decoration:none;
+	font-family:"Arial Cyr";
+	text-align:left;
+	vertical-align:bottom;
+	border:.5pt solid windowtext;
+}
+
+#indicator{
+	text-align:center;
+	z-index:+1;
+}
+#loadmsg {
+	font-weight:bold;
+	font-size:8pt;
+	color:#aaaaff;
+}
+#bar {
+	border-width:0;
+	background-color:#eeeeee
+}

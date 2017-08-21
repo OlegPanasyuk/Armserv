@@ -1,0 +1,56 @@
+<html>
+<head>
+<title>Выдвигающаяся с любой стороны панель на JQuery - JQuery</title>
+
+<script type="text/javascript" src="jquery.js"></script>
+<script src="jquery.tabslideout.js" type="text/javascript"></script>
+
+<style type="text/css">
+body {background:#FFD594;color:#000000;font-family:Verdana;font-size:12px;margin:0;padding:0}
+.h3 {padding:0;margin:0;margin-bottom:10px}
+
+.panel {
+	height:138px;
+	width: 250px;
+	background: #99250E;
+	color:#FFFFFF
+}
+.sp {padding:20px}
+</style>
+
+</head>
+<body>
+
+<div class="panel">
+<div class="sp">
+	<a class="handle" href="http://yraaa.ru">Yraaa</a
+
+	<span lang="ru">
+		мой@e-mail<br /><br />
+		skype<br /><br />
+		8-000-000-00-00<br /><br />
+		icq: 000000000
+	</span>
+</div>
+</div>
+
+
+<script type="text/javascript">
+$(function(){
+	$('.panel').tabSlideOut({							//Класс панели
+		tabHandle: '.handle',						//Класс кнопки
+		pathToTabImage: 'contacts.png',				//Путь к изображению кнопки
+		imageHeight: '138px',						//Высота кнопки
+		imageWidth: '40px',						//Ширина кнопки
+		tabLocation: 'left',						//Расположение панели top - выдвигается сверху, right - выдвигается справа, bottom - выдвигается снизу, left - выдвигается слева
+		speed: 300,								//Скорость анимации
+		action: 'click',								//Метод показа click - выдвигается по клику на кнопку, hover - выдвигается при наведении курсора
+		topPos: '35%',							//Отступ сверху
+		fixedPosition: false						//Позиционирование блока false - position: absolute, true - position: fixed
+	});
+});
+</script>
+
+
+</body>
+</html>

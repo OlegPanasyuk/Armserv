@@ -1,0 +1,104 @@
+	.col
+	{
+		width: 16px;
+		position: absolute;
+		z-index:+1;
+		cursor:hand;
+	}
+
+	.c0
+	{
+		border: none;
+		font-size: 8px;
+		font-weight: bolder;
+		height: 13px;
+		width: 58px;
+		color:transparent;
+	}
+   .bar
+    {
+	 text-align:center; 
+	 z-index:+1;	
+	}
+	.c20
+	{
+		border: none;
+		font-size: 12px;
+		font-weight: 600;
+		height: 15px;
+		width: 20px;
+		text-align :right;
+		position:absolute;
+		margin-right : 2px;
+		top: 455px;
+		cursor: hand;
+		background-color: transparent;
+		z-index: +1;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+	.c24
+	{
+		border: none;
+		font-size: 11px;
+		font-weight: 600;
+		height: 14px;
+		width: 24px;
+		text-align : center;
+		text-indent : 0px;
+		cursor:hand;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+ .input
+ {
+	font-size: 14px;
+	text-align: right;
+	font-weight: bolder;
+	border: thin solid #0000CD;
+	font-family: Arial, Helvetica, sans-serif;
+}
+ .podpis
+ {
+ font-size:12px;
+ font-weight:bolder;	
+ font-family: Arial, Helvetica, sans-serif;
+ }
+.text
+{
+font-size:11.0px;
+font-weight:bolder;
+position:absolute;
+text-align:right;
+font-family: Arial, Helvetica, sans-serif;
+}
+ .text2
+{
+	font-size: 12.0px;
+	font-weight: 600;
+	width:20px;
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.shape
+{
+position:absolute;
+left:-8px;
+width:60px;
+height:30px;
+text-align:left;
+font-family: Arial, Helvetica, sans-serif;
+}
+#load{
+	position: absolute;
+	text-align:center;
+	z-index:5;
+}
+#loadmsg {
+	font-weight:bold;
+	font-size:8pt;
+	color:#aaaaff;
+}
+#bar {
+	border-width:0;
+	background-color:#eeeeee
+}
+

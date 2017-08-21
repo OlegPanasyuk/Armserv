@@ -1,0 +1,887 @@
+<html>
+<head>
+	<title>За год по месяцам.</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+    <link type="text/css" rel="stylesheet" href="css/TABLE2.CSS">
+	<BASE target="frSheet">
+	<style media="print">
+	.help
+	{display:none;font-size:10px;}
+	</style>
+	<style media="screen">
+	.help
+	{display:inline;font-size:10px;}
+	</style>
+<style>
+FIELDSET
+{width: 100; border: 0 solid Black;}
+LEGEND
+{font-weight: bolder;font-size: 14px;color:blue;}
+LABEL
+{font-size: 12px;font-weight: bolder;}
+SELECT
+{font-size: 12px;font-weight: bolder;width:50; }
+TD
+{font-size: 12px;font-weight: bolder;}
+</style>
+	<link rel="stylesheet" href="css/j.css"></link>
+<?
+echo "<SCRIPT language=\"JavaScript1.2\">var tab=".$_GET["tab"]."</SCRIPT>";
+echo "<SCRIPT language=\"JavaScript1.2\" src=\"js/progressbar.js\"></SCRIPT>";
+echo "<script language=\"JavaScript1.2\" src=\"js/control_f2.js\"></script>";
+require_once("include/vbs.php");
+?>
+<script language="JavaScript" src="js/tabs.js">
+<!--
+//-->
+</script>
+
+<script src="1/jquery.js" type="text/javascript"></script>
+<script src="1/jquery.tabslideout.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(function(){
+	$('.help').tabSlideOut({							//Класс панели
+		tabHandle: '.handle',						//Класс кнопки
+		pathToTabImage: '1/contacts.png',				//Путь к изображению кнопки
+		imageHeight: '138px',						//Высота кнопки
+		imageWidth: '40px',						//Ширина кнопки
+		tabLocation: 'right',						//Расположение панели top - выдвигается сверху, right - выдвигается справа, bottom - выдвигается снизу, left - выдвигается слева
+		speed: 300,								//Скорость анимации
+		action: 'click',								//Метод показа click - выдвигается по клику на кнопку, hover - выдвигается при наведении курсора
+		topPos: '35%',							//Отступ сверху
+		fixedPosition: false						//Позиционирование блока false - position: absolute, true - position: fixed
+	});
+});
+</script>
+</head>
+
+<body id="f1" topmargin=0 marginheight=0 marginwidth=0 scroll="auto" onload="startIncrement();" background=tree/imgs/fon.gif>
+<div id="padding" style="height:60px;" class="help"></div>
+<div id="content" style="height:80%;">
+<?
+include("util_fun.php");
+$name = $_GET["iname"];
+$uid = $_GET["id"];
+$pid = $_GET["pid"];
+$lid = $_GET["lid"];
+$node = $_GET["node"];
+$dc = $_GET["dc"];
+$disp = $_GET["disp"];
+$maxp = $_GET["maxp"];
+$n_obj = $_GET["nobj"];
+$adr = $_GET["adr"];
+$edizm = $_GET["edizm"];
+if (!isset($date_1)) $date_1=$dc;
+if (!isset($pw_en)) $pw_en=$disp;
+
+ $type_izm = array();
+ $pwr = array();
+ $nrg = array();
+ $colname = array();
+ $count=0;$zn="";$ktr=1;
+//================================================================================================================================
+echo "
+<script language=\"JavaScript1.2\">
+	if (window.parent.toc.ntype)
+	{
+	 node=window.parent.toc.ntype.value;
+     if (node<2) {
+	  legenda.innerHTML='<span style=\"color:black;font-size:10px;\">вывод данных по объекту:</span> ';
+	  formatData.style.display='inline';
+	 }
+	 else {
+			legenda.innerHTML=' <span style=\"color:black;font-size:10px;\">(выберите счетчик)</span>';
+			formatData.style.display='none';
+			content.innerHTML='';
+		}
+	}	
+</script>";
+
+$TIME_START = getmicrotime(); 
+if (isset($date_1) and isset($uid) and isset($n_obj) and isset($adr) and isset($pw_en) and ($node<2) )
+{
+include("include/mysql.php"); //  Соединяемся с БД
+list ($ac_day,$ac_month,$ac_year) = explode (".",$date_1);
+$date_header1=$ac_day.'.'.$ac_month.'.'.$ac_year;
+
+$date_1=$ac_year.'-'.$ac_month.'-01';
+
+
+$type_izm=array();
+
+echo "<script>\n";
+echo "window.document.forms[0].disp.value='$disp';\n";
+echo "window.document.forms[0].dc.value='$dc';\n";
+echo "window.document.forms[0].iname.value='$name';\n";
+echo "window.document.forms[0].id.value='$uid';\n";
+echo "window.document.forms[0].pid.value='$pid';\n";
+echo "window.document.forms[0].lid.value='$lid';\n";
+echo "window.document.forms[0].node.value='$node';\n";
+echo "window.document.forms[0].maxp.value='$maxp';\n";
+echo "window.document.forms[0].edizm.value='$edizm';\n";
+if ($disp!=1){
+				echo "window.document.topmenu.maxp.style.visibility='hidden';\n";
+				echo "maxp_lab.innerText='';\n";
+			}
+echo "formatData.style.display='inline';\n";
+echo "</script>\n";
+?>
+
+<table width="100%" cellpadding="0" cellspacing="0" height="100%">
+<tr><td height="100%">
+ <table width="100%" cellpadding="0" cellspacing="0" height="100%">
+ <tr><td valign="top" bgcolor="EEEEEE">
+	<img src="tree/imgs/spacer.gif" height="1" width="1">
+	</td>
+	<td width="100%" valign="top" background="tree/imgs/fon.gif">
+	 <table border="1" bordercolor="A5D7D6" width="100%" cellpadding="10" id="TB">
+	 <tr><td  id="container">
+
+<?php
+function incrementProgressBar()
+{
+ global $count;
+ $count++;
+// echo "<script language=\"JavaScript\">incrementProgressBar();</script>\n";
+ return $count;
+}
+
+PrintHeader($pw_en,$uid,$n_obj,$adr,$date_1);
+$count=incrementProgressBar();
+$count=incrementProgressBar();
+PrintData($pw_en,$date_1,$uid,$n_obj,$adr,$table);
+
+
+$count=incrementProgressBar();
+$count=incrementProgressBar();
+//if ($pw_en<3) PrintSumData($pw_en,$date_1,$uid,$n_obj,$adr,$table);
+$count=incrementProgressBar();
+$count=incrementProgressBar();
+//if ($pw_en<3) PrintZoneData($pw_en,$date_1,$uid,$n_obj,$adr,$table);
+mysql_close();
+}
+//============================================================================================
+
+function PrintHeader($pw_en,$uid,$n_obj,$adr,$date_1)
+{
+  global $type_izm;
+  global $pwr;
+  global $nrg;
+  global $colname;
+  global $zn;
+  global $ktr;
+  global $edizm;
+  global $ac_year;
+  $cnt1=0;  $cnt2=0;
+//=====================определяем параметры и название точки учета===================================
+   $result=mysql_query("select item_name FROM objects WHERE  item_parent_id=-1");
+    if ($res=mysql_fetch_array($result,MYSQL_BOTH))
+	{
+ 		$obj_name=$res[0]; 
+	}
+	$result=mysql_query("select item_name FROM objects WHERE  item_id=(select item_parent_id FROM objects WHERE item_id=".$uid.") ");
+    if ($res=mysql_fetch_array($result,MYSQL_BOTH))
+	{
+	 $pname=$res[0];
+	} 
+	$result=mysql_query("select node_type FROM objects WHERE  item_id=".$uid." ");
+    if ($res=mysql_fetch_array($result,MYSQL_BOTH))
+	{
+	 $n_type=$res[0];
+	} 
+	$result=mysql_query("select izm_str,descript,znum,c_type,k_tr FROM counters WHERE  n_obj=".$n_obj." AND link_adr=".$adr." ");
+    if ($res=mysql_fetch_array($result,MYSQL_BOTH))
+	{
+	 $izm_str=$res[0];	$type_izm = explode (",",$izm_str); $ktr=$res[4];$ctype=$res[3];
+	 $name=$res[1]; 
+	 if ($n_type==0) {if ($ctype==0 or $ctype==-1 or $ctype==-2) {$znum= "номер счетчика ".$res[2];$zn=$res[2];} }
+	 else {$znum=""; $zn="";}
+	} 
+//==========================================================================================================================
+ for ($i=0;$i<count($type_izm);$i++)
+ {
+  if ($type_izm[$i]<=4)
+  {
+	if ($pw_en<3)
+	{
+	 $pwr[$cnt1]=$type_izm[$i];
+	 $nrg[$cnt1]=$type_izm[$i];
+	 $cnt1++;
+	} 
+   }
+  if ($type_izm[$i]>=5 and $type_izm[$i]<=8)
+  {
+	if ($pw_en==3)
+	{
+	 $nrg[$cnt2]=$type_izm[$i];
+	 $cnt2++;
+	} 
+  }
+ }
+  if ($pw_en==1)  
+  {
+  	for ($i=0;$i<count($pwr);$i++)
+	{
+	 $result=mysql_query("select pwr_symb,pwr_unit FROM izm_type WHERE izm_type=". $pwr[$i]." ");
+	 $row=mysql_fetch_array($result,MYSQL_BOTH);
+	 $str = $row[1];
+	 if ($edizm == 1000) $str = str_replace("к","М",$row[1]);
+	 $colname[$i]=$row[0]." ".$str;
+	}
+  }	
+  if ($pw_en==2)  
+  {
+  	for ($i=0;$i<count($nrg);$i++)
+	{
+	 $result=mysql_query("select nrj_symb,nrj_unit  FROM izm_type WHERE izm_type=". $nrg[$i]." ");
+	 $row=mysql_fetch_array($result,MYSQL_BOTH);
+	 $str = $row[1];
+	 if ($edizm == 1000) $str = str_replace("к","М",$row[1]);
+	 $colname[$i]=$row[0]." ".$str;
+	}
+  }	
+  if ($pw_en==3 and count($nrg)<>0)  
+  {
+  	for ($i=0;$i<count($nrg);$i++)
+	{
+	 $result=mysql_query("select nrj_symb,nrj_unit  FROM izm_type WHERE izm_type=". $nrg[$i]." ");
+	 $row=mysql_fetch_array($result,MYSQL_BOTH);
+	 $str = $row[1];
+	 if ($edizm == 1000) $str = str_replace("к","М",$row[1]);
+	 $colname[$i]=$row[0]." ".$str;
+	}
+  }	
+
+$count=incrementProgressBar();
+if (count($pwr)>0)
+{
+if ($pw_en<3) $col=count($pwr)*2+1;
+if ($pw_en==3) $col=count($pwr)*2+1;
+}
+else
+{
+if ($pw_en<3) $col=9;
+if ($pw_en==3) $col=9;
+}
+
+echo "<table cellpadding='0' cellspacing='0' align='center' border='0' id='TB2'>\n";
+//echo " 	<tr> <td colspan='".$col."' align='center'>".$obj_name." </td>   </tr>\n";
+echo " 	<tr> <td colspan='".$col."' align='center'>".$obj_name."</td>   </tr>\n";
+echo " 	<tr> <td colspan='".$col."' align='center'>".$pname." ".$name."</td>   </tr>\n";
+if ($znum!="") echo " 	<tr> <td colspan='".$col."' align='center'>".$znum."</td> </tr>\n";
+else echo " ";
+echo " 	<tr> <td colspan='".$col."' align='center'>Данные за ". $ac_year." </td> </tr>\n";
+   	 echo "   		<tr>\n";
+	 echo "			<td class='x23' style='border-bottom:none'>&nbsp;</td>\n";
+//	 echo "			<td rowspan='2' height="34" class='x23' style='border-left:none;width:10px;'>ВЗ</td>\n";
+	 if ($pw_en==1) echo "			<td  colspan='".(count($pwr)*2)."' class='x23' style='border-left:none' align='center'>Мощность</td>\n";
+	 if ($pw_en==2) echo "			<td  colspan='".(count($nrg)*2)."' class='x23' style='border-left:none' align='center'>Энергия</td>\n";
+	 if ($pw_en==3 and count($nrg)<>0) echo "			<td  colspan='".(count($nrg)*2)."' class='x23' style='border-left:none' align='center'>Показания</td>\n";
+	 echo "		</tr>\n";
+	$count=incrementProgressBar();
+	 echo "		<tr>\n";
+	 	if (count($nrg)<>0) echo "			<td class='x23' style='border-top:none'>Месяц</td>\n"; 
+		else echo "			<td class='x23' style='border-top:none'>Данная группа не предусматривает вывод показаний</td>\n";
+ 		 for ($i=0;$i<count($colname);$i++)
+		 {
+		  echo "		<td class='x23' style='border-top:none;border-left:none' width='75'>".$colname[$i]."</td>\n";
+		  echo "		<td class='x23' style='border-top:none;border-left:none' width='5'>&nbsp;</td>\n";
+		 }
+	 echo "	</tr>\n";
+}
+function PrintData($pw_en,$date_1,$uid,$n_obj,$adr,$table)
+{
+  global $type_izm; // типы измерений которые необходимо отобразить это масив
+  global $pwr; // типы измерений отвечающих за мощность это массив
+  global $nrg; // типы измерений отвечающих за энергию это массив
+  global $colname; // название единиц измерений
+  global $ktr; // коэфф транформации
+  global $node; // тип счетчика
+  global $edizm; // коэфф перевода в мегаватты
+  global $ac_month;
+  
+  $month = array('Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'); // 
+  $izm = array(); // значения вывоодимые 
+  $flag = array(); // контроль достоверности данных
+  $start_pokaz = array(); // начальные показания
+
+  //$result=mysql_query("select SUM(znach),MAX(flag),data,izm_type FROM ".$table." WHERE ".$table.".data BETWEEN '".$date_1."' AND '".$date_2."'  AND ".$table.".n_obj=".$n_obj." AND link_adr=".$adr." AND ".$table.".izm_type IN(".$nrg_str.") GROUP BY data,izm_type");
+	
+	
+	if ($pw_en == 1)
+		{
+			for ($i=0;$i<count($pwr);$i++)
+			{
+				$pwr_str.=$pwr[$i].',';
+				//echo $i;
+			}
+			$pwr_str=substr($pwr_str,0,strrpos($pwr_str, ","));
+			 $result=mysql_query("select DATE_ADD('".$date_1."',INTERVAL 1 MONTH)");
+				$res=mysql_fetch_array($result,MYSQL_BOTH);
+				$date_1=$res[0];
+			for ($i=$ac_month-1; $i>=0; $i--)
+			{
+				$result=mysql_query("select DATE_ADD('".$date_1."',INTERVAL -1 DAY)");
+				$res=mysql_fetch_array($result,MYSQL_BOTH);
+				$date_3=$res[0];
+				
+				
+				$result=mysql_query("select DATE_ADD('".$date_1."',INTERVAL -1 MONTH)");
+				$res=mysql_fetch_array($result,MYSQL_BOTH);
+				$date_1=$res[0];
+				//echo " - $res[0] \n - $res[1] <br />";
+				if ($maxp==1) //мощностьв периоды контроля
+				{
+					$result=mysql_query("Select MAX(val.znach) As mx,MAX(flag),data,izm_type From ".$table.", intervals Where ".$table.".data BETWEEN '".$date_1."' AND '".$date_3."'  AND ".$table.".n_obj=".$n_obj." AND link_adr=".$adr." AND ".$table.".izm_type IN(".$pwr_str.") AND val.inter_val = intervals.inter_val AND intervals.max_zone IN(3,4) Group By data,izm_type order by ".$table.".izm_type");
+				}	
+				else//общий максимум мощности
+				{
+					$result=mysql_query("Select MAX(val.znach),MAX(flag),data,izm_type From ".$table." Where ".$table.".data BETWEEN '".$date_1."' AND '".$date_3."'  AND ".$table.".n_obj=".$n_obj." AND link_adr=".$adr." AND ".$table.".izm_type IN(1,2,3,4) Group By data,izm_type");
+				}
+				
+				if ($result)
+				{
+					$cnt=0;
+					//echo"$cnt - $res[0] - $res[3] - $res[2] - $res[1]<br />";
+					$max1 = 0;
+						$max2 = 0;
+						$max3 = 0;
+						$max4 = 0;
+						$f1='&nbsp;';
+						$f2='&nbsp;';
+						$f3='&nbsp;';
+						$f4='&nbsp;';
+						$izm = array();
+						$flag = array();
+					while($res=mysql_fetch_array($result,MYSQL_NUM))
+					{
+						$cnt++;
+						
+						//echo"$cnt - $res[0] - $res[3] - $res[2] - $res[1]<br />";
+						if ($res[3]==1)
+						{$max1 = max($max1,$res[0]);
+							if ($res[1] <> '')
+								{
+									$f1 = $res[1];
+								}
+							$izm [$res[3]] = $max1;	
+							$flag [$res[3]] = $f1;
+						}
+						if ($res[3]==2)
+						{$max2 = max($max2,$res[0]);
+							if ($res[1] <> '')
+								{
+									$f2 = $res[1];
+								}
+								$izm [$res[3]] = $max2;
+								$flag [$res[3]] = $f2;
+						}
+						if ($res[3]==3)
+						{$max3 = max($max3,$res[0]);
+							if ($res[1] <> '')
+								{
+									$f3 = $res[1];
+								}
+								$izm [$res[3]] = $max3;
+								$flag [$res[3]] = $f3;
+						}
+						if ($res[3]==4)
+						{$max4 = max($max4,$res[0]);
+							if ($res[1] <> '')
+								{
+									$f4 = $res[1];
+								}
+								$izm [$res[3]] = $max4;
+								$flag [$res[3]] = $f4;
+						}
+					}
+				} else
+				{
+					echo"неадекватный запрос";
+				}
+				echo "<tr>\n";
+				echo "<td class='x22' align='center' style='font-weight:700;text-align:center;border-top:none;'>".$month[$i]."</td>\n";
+				for ($j=1; $j<count($pwr)+1; $j++)
+					{	echo "	<td class='x22' style='border-top:none;border-left:none'>&nbsp;".format($izm[$j]*2/$edizm)."</td>\n";
+						echo "	<td class='x22' style='border-top:none;border-left:none' align='right'>&nbsp;".$flag[$j]."</td>\n";
+						
+					}	
+				echo "</tr>\n";	
+			}
+			
+		}  
+	if ($pw_en == 2)
+		{
+			
+			for ($i=0;$i<count($nrg)-1;$i++)
+			{
+				$nrg_str.=$nrg[$i].',';
+			}
+			$nrg_str.=$nrg[count($nrg)-1];
+			$result=mysql_query("select DATE_ADD('".$date_1."',INTERVAL 1 MONTH)");
+				$res=mysql_fetch_array($result,MYSQL_BOTH);
+				$date_1=$res[0];
+			for ($i=$ac_month-1; $i>=0; $i--)
+			{
+				$result=mysql_query("select DATE_ADD('".$date_1."',INTERVAL -1 DAY)");
+				$res=mysql_fetch_array($result,MYSQL_BOTH);
+				$date_3=$res[0];
+				//echo "$nrg_str";
+				
+				$result=mysql_query("select DATE_ADD('".$date_1."',INTERVAL -1 MONTH)");
+				$res=mysql_fetch_array($result,MYSQL_BOTH);
+				$date_1=$res[0];
+				//echo " - $res[0] \n - $res[1] <br />";
+				echo "<tr>\n";
+				echo "<td class='x22' align='center' style='font-weight:700;text-align:center;border-top:none;'>".$month[$i]."</td>\n";
+				$result=mysql_query("select SUM(znach),MAX(flag),data,izm_type FROM val WHERE data BETWEEN '".$date_1."' AND '".$date_3."' AND n_obj=".$n_obj." AND link_adr=".$adr." AND val.izm_type IN(".$nrg_str.") GROUP BY data,izm_type");
+				if ($result)
+				{
+					$cnt=0;
+					$sum1 =0;
+					$sum2 =0;
+					$sum3 =0;
+					$sum4 =0;
+					$f1='&nbsp;';
+					$f2='&nbsp;';
+					$f3='&nbsp;';
+					$f4='&nbsp;';
+					$izm = array();
+					$flag = array();
+					while($res=mysql_fetch_array($result,MYSQL_NUM))
+					{
+						$cnt++;
+						//echo"$cnt - $res[0] - $res[3] - $res[2] - $res[1]<br />";
+						
+						if ($res[3]==1)
+						{$sum1 = $sum1 + $res[0];
+							if ($res[1] <> '')
+								{
+									$f1 = $res[1];
+								}
+							$izm [$res[3]] = $sum1;	
+							$flag [$res[3]] = $f1;
+						}
+						if ($res[3]==2)
+						{$sum2 = $sum2 + $res[0];
+							if ($res[1] <> '')
+								{
+									$f2 = $res[1];
+								}
+								$izm [$res[3]] = $sum2;	
+								$flag [$res[3]] = $f2;
+						}
+						if ($res[3]==3)
+						{$sum3 = $sum3 + $res[0];
+							if ($res[1] <> '')
+								{
+									$f3 = $res[1];
+								}
+								$izm [$res[3]] = $sum3;	
+								$flag [$res[3]] = $f3;
+						}
+						if ($res[3]==4)
+						{$sum4 = $sum4 + $res[0];
+							if ($res[1] <> '')
+								{
+									$f4 = $res[1];
+								}
+								$izm [$res[3]] = $sum4;	
+								$flag [$res[3]] = $f4;
+						}
+					}
+					//echo "сумма за месяц = $sum1 - $sum2 - $sum3 - $sum4<br />";
+				} else
+				{
+					echo"неадекватный запрос";
+				}
+				
+				for ($j=0; $j<count($nrg); $j++)
+					{	echo "	<td class='x22' style='border-top:none;border-left:none'>&nbsp;".format($izm[$nrg[$j]]/$edizm)."</td>\n";
+						echo "	<td class='x22' style='border-top:none;border-left:none' align='right'>&nbsp;".$flag[$nrg[$j]]."</td>\n";
+					}	
+				echo "</tr>\n";	
+			}
+		}
+	if ($pw_en == 3 and count($nrg)<>0)
+		{
+			for ($i=0;$i<count($nrg);$i++)
+			{
+				$nrg_str.=$nrg[$i].',';
+			}
+			$nrg_str=substr($nrg_str,0,strrpos($nrg_str, ","));
+			$result=mysql_query("select DATE_ADD('".$date_1."',INTERVAL 1 MONTH)");
+				$res=mysql_fetch_array($result,MYSQL_BOTH);
+				$date_1=$res[0];
+			for ($i=$ac_month-1; $i>=0; $i--)
+				{
+				$result=mysql_query("select DATE_ADD('".$date_1."',INTERVAL -1 DAY)");
+				$res=mysql_fetch_array($result,MYSQL_BOTH);
+				$date_3=$res[0];
+				//echo "$date_3 = date_3";
+				
+				$result=mysql_query("select DATE_ADD('".$date_1."',INTERVAL -1 MONTH)");
+				$res=mysql_fetch_array($result,MYSQL_BOTH);
+				$date_1=$res[0];
+				//echo " - $res[0] \n - $res[1] <br />";
+				$result=mysql_query("select znach,flag,data,izm_type FROM ".$table." WHERE ".$table.".data='".$date_3."'  AND ".$table.".n_obj=".$n_obj." AND link_adr=".$adr."  AND ".$table.".izm_type IN(".$nrg_str.")  and ".$table.".inter_val=48 GROUP BY data,izm_type");
+					if ($result)
+					{
+						$cnt=0;
+						$sum1 =0;
+						$sum2 =0;
+						$sum3 =0;
+						$sum4 =0;
+						$f1='&nbsp;';
+						$f2='&nbsp;';
+						$f3='&nbsp;';
+						$f4='&nbsp;';
+						$izm = array();
+						$flag = array();
+						while($res=mysql_fetch_array($result,MYSQL_NUM))
+						{
+							$cnt++;
+							//echo"$cnt - $res[0] - $res[3] - $res[2] - $res[1]<br />";
+							$izm [$res[3]] = $res[0];	
+							$flag [$res[3]] = $res[1];
+							
+						}	
+					}
+					else
+					{
+							echo"неадекватный запрос";
+					}
+					echo "<tr>\n";
+				echo "<td class='x22' align='center' style='font-weight:700;text-align:center;border-top:none;'>".$month[$i]."</td>\n";
+				for ($j=5; $j<9; $j++)
+					{	echo "	<td class='x22' style='border-top:none;border-left:none'>&nbsp;".format($izm[$j]/$edizm)."</td>\n";
+						echo "	<td class='x22' style='border-top:none;border-left:none' align='right'>&nbsp;".$flag[$j]."</td>\n";
+					}	
+				echo "</tr>\n";	
+				}	
+		}
+}
+
+function PrintSumData($pw_en,$date_1,$uid,$n_obj,$adr,$table)
+{
+  global $type_izm;
+  global $pwr;
+  global $nrg;
+  global $maxp;
+  global $colname;
+   global $node;
+   global $edizm;
+  $izm = array(); $time = array();	$flag = array();
+ $count=incrementProgressBar();
+ if ($pw_en==1) $colspan=count($pwr)*2;
+ else $colspan=count($nrg)*2;
+	echo " <tr>	<td height='7' class='x15' colspan='".($colspan+1)."'></td></tr>\n";
+	echo " <tr>\n";
+	echo "<td height='17' class='x15' >&nbsp;</td>\n";
+	if ($pw_en==1) 
+	{
+		if ($maxp==1) echo "<td class='x23'  colspan=".$colspan."  align='center'>макс.мощность в периоды контроля</td>\n";
+		else echo "<td class='x23'  colspan=".$colspan."  align='center'>максимальная мощность</td>\n";
+	}
+		if ($pw_en==2) echo "<td class='x23'  colspan=".$colspan."  align='center'>суммарная энергия</td>\n";
+		
+	echo "</tr>\n";
+ 	$count=incrementProgressBar();
+	$count=incrementProgressBar();
+	 for ($i=0;$i<count($nrg);$i++)
+  	{
+	  $i_type=$nrg[$i];
+	  $int_val=$j+1;
+	  if ($pw_en==1)//считать мощность
+	  {
+ 	   if ($maxp==1) //мощность в период контроля
+	   {
+		 $result=mysql_query(" SELECT s.mx,i.beg_int,i.end_int,s.inter_val,i.max_zone FROM (SELECT    MAX(znach) as mx, inter_val FROM ".$table." WHERE  ".$table.".data='".$date_1."' AND ".$table.".n_obj=".$n_obj." AND link_adr=".$adr." AND ".$table.".izm_type=".$i_type." GROUP BY inter_val ORDER BY mx DESC) s, intervals i  WHERE s.inter_val = i.inter_val  and i.max_zone in(3,4)");
+		}
+		else //общий максимум мощности
+		{
+		 $result=mysql_query(" SELECT s.mx,i.beg_int,i.end_int,s.inter_val FROM (SELECT    MAX(znach) as mx, inter_val FROM ".$table." WHERE  ".$table.".data='".$date_1."' AND ".$table.".n_obj=".$n_obj." AND link_adr=".$adr." AND ".$table.".izm_type=".$i_type." GROUP BY inter_val ORDER BY mx DESC) s, intervals i WHERE s.inter_val = i.inter_val ");
+		} 
+	    if ( $res=mysql_fetch_array($result,MYSQL_NUM))
+		 {
+	    	$izm[$i]=$res[0]; if ($izm[$i]>0) $time[$i]=$res[1].'-'.$res[2]; 		else $time[$i]=" \n"; 
+		 }
+	   }	 
+       if ($pw_en==2)
+	   {
+		$result2=mysql_query("select SUM(znach),MAX(flag) FROM ".$table." WHERE ".$table.".data='".$date_1."'  AND n_obj=".$n_obj." AND link_adr=".$adr."  AND izm_type=".$i_type." group by izm_type order by izm_type");
+	    if ($res2=mysql_fetch_array($result2,MYSQL_NUM)) 
+		 {
+			if ($pw_en<>1) $izm[$i]=$res2[0];
+			$flag[$i]=$res2[1];
+		 }
+	   }
+	    $count=incrementProgressBar();
+	  }	
+		 if ($pw_en==1)
+		 {
+		  //вывод мощности 
+			echo "<tr>\n";
+			echo "	<td height='15' class='x28' align='center' style='border-right:none;border-bottom:none;'>За сутки</td>\n";
+			for ($i=0;$i<count($nrg);$i++)
+			{
+		 	if ($i>0)  
+			   echo "	<td class='x22' style='border-top:none;border-left:none;border-bottom:none;'>&nbsp;".format($izm[$i]*2/$edizm)."</td>\n";
+		 	 else    
+		   	   echo "	<td class='x22' style='border-top:none;border-bottom:none;'>&nbsp;".format($izm[$i]*2/$edizm)."</td>\n";
+		 	   echo "	<td class='x22' style='border-top:none;border-left:none;border-bottom:none;' align='right'>&nbsp;".$flag[$i]."</td>\n";
+		    }	
+  		    echo "</tr>\n";	
+			echo "<tr>\n";
+				echo "	<td height='15' class='x28' align='center' style='border-right:none;border-top:none;'>&nbsp;</td>\n";
+				for ($i=0;$i<count($nrg);$i++)
+				{
+				 	if ($i>0)  
+					 echo "	<td class='x22' style='border-top:none;border-left:none;'>&nbsp;".$time[$i]."</td>\n";
+				 	else    
+				     echo "	<td class='x22' style='border-top:none;'>&nbsp;".$time[$i]."</td>\n";
+		 	     echo "	<td class='x22' style='border-top:none;border-left:none;' align='right'>&nbsp;</td>\n";
+			    }	
+		    echo "</tr>\n";	
+		  }	 
+		  if ($pw_en==2)  
+		   {
+		  //вывод энергии 
+			echo "<tr>\n";
+			echo "	<td height='20' class='x28' align='center' style='border-right:none;'>за сутки</td>\n";
+			for ($i=0;$i<count($nrg);$i++)
+			{
+		    if ($i>0) echo "	<td class='x22' style='border-top:none;border-left:none;'>&nbsp;".format($izm[$i]/$edizm)."</td>\n";
+			else echo "	<td class='x22' style='border-top:none;'>&nbsp;".format($izm[$i]/$edizm)."</td>\n";
+		    echo "	<td class='x22' style='border-top:none;border-left:none' align='right;'>&nbsp;".$flag[$i]."</td>\n";
+			}
+			 echo "</tr>\n";	
+		   }
+	if ($result) mysql_free_result($result);	if ($result2) mysql_free_result($result2);
+	$count=incrementProgressBar();
+ }
+
+ 
+ 
+ 
+function PrintZoneData($pw_en,$date_1,$uid,$n_obj,$adr,$table)
+//рисование итогов по зонам
+{
+  global $type_izm;
+  global $pwr;
+  global $nrg;
+  global $node;
+  global $edizm;
+ $izm = array(); $time = array();	 $flag = array();
+//================================================================================================
+  	$result4=mysql_query("select * from seasons_hint order by n_season");
+	if ($result4)
+	{
+		 while ($res4=mysql_fetch_array($result4,MYSQL_NUM))
+			{
+			 list ($ac_year,$ac_month,$ac_day) = explode ("-",$date_1);
+			$begin_date[$res4[0]-1]=mktime (0,0,0, $res4[2], $res4[1], $ac_year);
+			$end_date[$res4[0]-1]=mktime (0,0,0, $res4[4], $res4[3], $ac_year);
+		   }
+   }		
+	 $curdate=str2date($date_1);
+	 if ($curdate>=$begin_date[1] and $curdate<=$end_date[1])
+	{
+	$isHeatSeason="Лето";$seas=2;} 
+	else {
+	$isHeatSeason="Зима";$seas=1;}
+//================================================================================================
+ if ($pw_en==1) //считаем мощность
+ {
+  if ($node==-1)//если обогрев
+   $result3=mysql_query("select n_zone,color,descript,timezone_h FROM zones where n_zone in (select distinct heat_zone from intervals) order by n_zone");
+  else if ($node==-2)//если генератор
+  {
+    if ($seas==1) $result3=mysql_query("select n_zone,color,descript,timezone_w FROM zones where n_zone in (select distinct max_zone from intervals) order by n_zone");
+	else if ($seas==2) $result3=mysql_query("select n_zone,color,descript,timezone_s FROM zones where n_zone in (select distinct max_zone from intervals) order by n_zone");
+  } 
+  else
+   $result3=mysql_query("select n_zone,color,descript,timezone_p FROM zones where n_zone in (select distinct max_zone from intervals) order by n_zone");
+ }
+ else //считаем энергию
+  {
+  if ($node==-1)//если обогрев
+   $result3=mysql_query("select n_zone,color,descript,timezone_h FROM zones where n_zone in (select distinct heat_zone from intervals) order by n_zone");
+  else if ($node==-2)//если генератор
+  {
+    if ($seas==1) $result3=mysql_query("select n_zone,color,descript,timezone_w FROM zones where n_zone in (select distinct winter_zone from intervals) order by n_zone");
+	else if ($seas==2) $result3=mysql_query("select n_zone,color,descript,timezone_s FROM zones where n_zone in (select distinct summer_zone from intervals) order by n_zone");
+	}
+   else $result3=mysql_query("select n_zone,color,descript,timezone_e FROM zones where n_zone in (select distinct n_zone from intervals) order by n_zone");
+  }
+ while ($res3=mysql_fetch_array($result3,MYSQL_BOTH))
+	{
+		$n_zone=$res3[0];$bgcolor=$res3[1]; $tariff_name=$res3[2];$tariff_time="<font style='font-size:8px'>".$res3[3]."</font>";
+		 $count=incrementProgressBar();
+ for ($i=0;$i<count($nrg);$i++)
+ {
+	$i_type=$nrg[$i];
+	if ($node==-1 and $n_zone!=2)//обогрев
+	{
+		$result=mysql_query(" SELECT s.mx,i.beg_int,i.end_int,s.inter_val,i.heat_zone FROM (SELECT MAX(znach) as mx, inter_val FROM ".$table."  WHERE  ".$table.".data='".$date_1."' AND ".$table.".n_obj=".$n_obj." AND link_adr=".$adr." AND ".$table.".izm_type=".$i_type."  GROUP BY inter_val ORDER BY mx DESC) s, intervals i  WHERE s.inter_val = i.inter_val AND i.heat_zone=".$n_zone."");
+	}
+	 else if ($node==-2)//генерирущий
+	 {
+		if ($seas==1)//сезон зима
+			{
+			 if ($i_type==2)
+			 { 
+			  $result=mysql_query(" SELECT s.mx,i.beg_int,i.end_int,s.inter_val,i.winter_zone,s.flag FROM (SELECT MAX(znach) as mx, inter_val,flag FROM ".$table." WHERE  ".$table.".data='".$date_1."' AND ".$table.".n_obj=".$n_obj." AND link_adr=".$adr." AND ".$table.".izm_type=".$i_type." GROUP BY inter_val ORDER BY mx DESC) s, intervals i WHERE s.inter_val = i.inter_val AND i.winter_zone=".$n_zone."");
+			 } 
+			 else $result=mysql_query(" SELECT s.mx,i.beg_int,i.end_int,s.inter_val,i.max_zone,s.flag FROM (SELECT    MAX(znach) as mx, inter_val,flag FROM ".$table." WHERE  ".$table.".data='".$date_1."' AND ".$table.".n_obj=".$n_obj." AND link_adr=".$adr." AND ".$table.".izm_type=".$i_type." GROUP BY inter_val ORDER BY mx DESC) s, intervals i WHERE s.inter_val = i.inter_val AND i.max_zone=".$n_zone."");
+			}
+		else if ($seas==2)//сезон лето
+			{
+			 if ($i_type==2) $result=mysql_query(" SELECT s.mx,i.beg_int,i.end_int,s.inter_val,i.summer_zone,s.flag FROM (SELECT  MAX(znach) as mx, inter_val,flag FROM ".$table." WHERE  ".$table.".data='".$date_1."' AND ".$table.".n_obj=".$n_obj." AND link_adr=".$adr." AND ".$table.".izm_type=".$i_type." GROUP BY inter_val ORDER BY mx DESC) s, intervals i WHERE s.inter_val = i.inter_val AND i.summer_zone=".$n_zone."");
+			 else $result=mysql_query(" SELECT s.mx,i.beg_int,i.end_int,s.inter_val,i.max_zone,s.flag FROM (SELECT    MAX(znach) as mx, inter_val,flag FROM ".$table." WHERE  ".$table.".data='".$date_1."' AND ".$table.".n_obj=".$n_obj." AND link_adr=".$adr." AND ".$table.".izm_type=".$i_type." GROUP BY inter_val ORDER BY mx DESC) s, intervals i WHERE s.inter_val = i.inter_val AND i.max_zone=".$n_zone."");
+			}	
+	 }
+	 else//обычный учет
+	 {
+		$result=mysql_query(" SELECT s.mx,i.beg_int,i.end_int,s.inter_val,i.max_zone,s.flag FROM (SELECT    MAX(znach) as mx, inter_val,flag FROM ".$table." WHERE  ".$table.".data='".$date_1."' AND ".$table.".n_obj=".$n_obj." AND link_adr=".$adr." AND ".$table.".izm_type=".$i_type." GROUP BY inter_val ORDER BY mx DESC) s, intervals i WHERE s.inter_val = i.inter_val AND i.max_zone=".$n_zone."");
+	 }	
+	if ($res=mysql_fetch_array($result,MYSQL_NUM))
+	 {
+	    $izm[$i]=$res[0];$flag[$i]=$res[5]; if ($izm[$i]>0) $time[$i]=$res[1].'-'.$res[2]; else $time[$i]=" \n"; 
+	 }
+	 else {$time[$i]=" \n";$izm[$i]=0;$flag[$i]='^';}
+//=====================================================================================================================	
+	if ($pw_en==2)
+	 {
+	  if ($node==-1 and $n_zone!=2)//обогрев
+	   {
+	   	$result2=mysql_query("select SUM(znach),MAX(flag) FROM ".$table.",intervals WHERE ".$table.".data='".$date_1."'  AND n_obj=".$n_obj." AND link_adr=".$adr."  AND izm_type=".$i_type." AND intervals.n_zone<>2 AND ".$table.".inter_val=intervals.inter_val group by izm_type order by izm_type");
+	   }
+	  else if ($node==-2)//генерирущий
+		{	  
+	   		if ($seas==1) 
+			{
+			 if ($i_type==2) $result2=mysql_query("select SUM(znach),MAX(flag) FROM ".$table.",intervals WHERE ".$table.".data='".$date_1."'  AND n_obj=".$n_obj." AND link_adr=".$adr."  AND izm_type=".$i_type." AND intervals.winter_zone=".$n_zone." AND ".$table.".inter_val=intervals.inter_val");
+			 else  $result2=mysql_query("select SUM(znach),MAX(flag) FROM ".$table.",intervals WHERE ".$table.".data='".$date_1."'  AND n_obj=".$n_obj." AND link_adr=".$adr."  AND izm_type=".$i_type." AND intervals.n_zone=".$n_zone." AND ".$table.".inter_val=intervals.inter_val");
+			} 
+	   		else if ($seas==2) 
+			{
+			 if ($i_type==2) $result2=mysql_query("select SUM(znach),MAX(flag) FROM ".$table.",intervals WHERE ".$table.".data='".$date_1."'  AND n_obj=".$n_obj." AND link_adr=".$adr."  AND izm_type=".$i_type." AND intervals.summer_zone=".$n_zone." AND ".$table.".inter_val=intervals.inter_val group by izm_type order by izm_type");
+			 else  $result2=mysql_query("select SUM(znach),MAX(flag) FROM ".$table.",intervals WHERE ".$table.".data='".$date_1."'  AND n_obj=".$n_obj." AND link_adr=".$adr."  AND izm_type=".$i_type." AND intervals.n_zone=".$n_zone." AND ".$table.".inter_val=intervals.inter_val");
+			} 
+		}	
+ 	  else 
+	  {
+	   $result2=mysql_query("select SUM(znach),MAX(flag) FROM ".$table.",intervals WHERE ".$table.".data='".$date_1."'  AND n_obj=".$n_obj." AND link_adr=".$adr."  AND izm_type=".$i_type." AND intervals.n_zone=".$n_zone." AND ".$table.".inter_val=intervals.inter_val");
+	  } 
+    if ($res2=mysql_fetch_array($result2,MYSQL_NUM)) 
+	 {
+		$izm[$i]=$res2[0];$flag[$i]=$res2[1];
+	 }
+	else {$time[$i]=" \n";$izm[$i]=0;$flag[$i]='^';}
+	 }
+  }
+ echo "<tr>	<td height='7' class='x15' colspan='".(count($nrg)*2+1)."'></td></tr>\n";		
+
+ //========================отрисовка зон==================================================
+	 if ($pw_en==1)
+	 {
+      echo "<tr bgcolor=".$bgcolor.">\n";
+		echo "<td height='15' rowspan='1' class='x23' style='border-bottom:none;border-right:none;width:150px;'>тариф ".$tariff_name."</td>\n";
+  		//вывод мощности 
+		for ($i=0;$i<count($nrg);$i++)
+		{
+				 if ($i>0)  echo "	<td class='x22' style='border-left:none;border-bottom:none;'>&nbsp;".format($izm[$i]*2/$edizm)."</td>\n";
+				 else       echo "	<td class='x22' style='border-bottom:none;'>&nbsp;".format($izm[$i]*2/$edizm)."</td>\n";
+			 	 echo "	<td class='x22' style='border-left:none;border-bottom:none;' align='right'>&nbsp;".$flag[$i]."</td>\n";
+	  }	 
+	 echo "</tr>\n";	
+
+      echo "<tr bgcolor=".$bgcolor.">\n";
+  	echo "<td height='15' rowspan='1' class='x23' style='border-right:none;width:150px;'>&nbsp;</td>\n";
+  		//вывод мощности 
+		for ($i=0;$i<count($nrg);$i++)
+		{
+		   	if ($i!=1)	
+			{
+			   $result4=mysql_query("select n_zone,color,descript,timezone_p FROM zones where n_zone=".$n_zone." ");
+			   if ($res4=mysql_fetch_array($result4,MYSQL_NUM)) 
+			    $t_t="<font style='font-size:8px'>".$res4[3]."</font>";
+			 if ($i>0)   echo "	<td class='x22' style='border-left:none;border-top:none;'>&nbsp;".$time[$i]."<br>".$t_t."</td>\n";
+			 else    	 echo "	<td class='x22' style='border-top:none;'>&nbsp;".$time[$i]."<br>".$t_t."</td>\n";
+		 	 echo "	<td class='x22' style='border-left:none;border-top:none;' align='right'>&nbsp;</td>\n";
+			} 
+			else
+			{
+			 if ($i>0)   echo "	<td class='x22' style='border-left:none;border-top:none;'>&nbsp;".$time[$i]."<br>".$tariff_time."</td>\n";
+			 else    	 echo "	<td class='x22' style='border-top:none;'>&nbsp;".$time[$i]."<br>".$tariff_time."</td>\n";
+		 	 echo "	<td class='x22' style='border-left:none;border-top:none;' align='right'>&nbsp;</td>\n";
+			}
+	  }	 
+	 echo "</tr>\n";	
+	}	 
+
+	   if ($pw_en==2)  
+	   {	
+     echo "<tr bgcolor=".$bgcolor.">\n";
+		echo "<td height='17' class='x23' style='border-right:none;width:150px;'>тариф ".$tariff_name."</td>\n";
+	  //вывод энергии 
+		for ($i=0;$i<count($nrg);$i++)
+		{
+		    if ($i>0) echo "	<td class='x22' style='border-left:none;border-bottom:none;'>&nbsp;".format($izm[$i]/$edizm)."</td>\n";
+				else echo "	<td class='x22' style='border-bottom:none;'>&nbsp;".format($izm[$i]/$edizm)."</td>\n";
+		    echo "	<td class='x22' style='border-left:none;border-bottom:none;' align='right;'>&nbsp;".$flag[$i]."</td>\n";
+		}	
+	 echo "</tr>\n";	
+     echo "<tr bgcolor=".$bgcolor.">\n";
+		echo "<td height='17' class='x23' style='border-right:none;border-top:none;width:150px;'>&nbsp;</td>\n";
+	  //вывод энергии 
+		for ($i=0;$i<count($nrg);$i++)
+		{
+	   		if ($i!=1)	
+			{
+			   $result4=mysql_query("select n_zone,color,descript,timezone_e FROM zones where n_zone=".$n_zone." ");
+			   if ($res4=mysql_fetch_array($result4,MYSQL_NUM)) 
+			    $t_t="<font style='font-size:8px'>".$res4[3]."</font>";
+			    if ($i>0) echo "	<td class='x22' style='border-left:none;border-top:none;'>".$t_t."</td>\n";
+				else echo "	<td class='x22' style='border-top:none;'>".$t_t."</td>\n";
+			    echo "	<td class='x22' style='border-left:none;border-top:none;' align='right;'>&nbsp;</td>\n";
+			}  
+			else
+			{
+		    if ($i>0) echo "	<td class='x22' style='border-left:none;border-top:none;'>".$tariff_time."</td>\n";
+				else echo "	<td class='x22' style='border-top:none;'>".$tariff_time."</td>\n";
+		    echo "	<td class='x22' style='border-left:none;border-top:none;' align='right;'>&nbsp;</td>\n";
+		   }	
+		}	
+	 echo "</tr>\n";	
+	  }
+  }	 
+}
+//============================================================================================
+echo "</table>\n";
+$TIME_END = getmicrotime();
+$TIME_SCRIPT = $TIME_END - $TIME_START; 
+?>
+</td></tr></table>
+</td></tr></table>
+</td></tr></table>
+</div>
+<?
+if (!isset($pw_en)) $pw_en=0;
+if (!isset($date_1)) $date_1=date('Y-m-d');
+list($ac_year,$ac_month,$ac_day)=explode("-",$date_1);
+echo "<div id='activator' ONCLICK=ToXls_1('TB',1,'".$pw_en."','".$count."',0,'".$ac_year."-".$ac_month."-".$ac_day."','".$zn."',0)></div>\n"; 
+?>
+<center>
+<div style="color:white;" class="help"><b>.::</b>
+Время выполнения запроса <?=number_format($TIME_SCRIPT,3,".","");?> сек.
+<b>::.</b>
+</div>
+</center>
+<script language="VBScript" src="js/excel_export.vbs">
+<!-- 
+// --> 
+</script>
+</body>
+</html>

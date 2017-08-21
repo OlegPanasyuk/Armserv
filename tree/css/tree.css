@@ -1,0 +1,46 @@
+.skin0 {
+position:absolute;
+text-align:left;
+width:160px;
+border:2px solid black;
+background-color:menu;
+font-family:Verdana;
+line-height:20px;
+cursor:default;
+visibility:hidden;
+}
+.skin1 {
+cursor:default;
+font:menutext;
+position:absolute;
+text-align:left;
+font-family: Arial, Helvetica, sans-serif;
+font-size: 10pt;
+width:150px;
+background-color:menu;
+border:1 solid buttonface;
+visibility:hidden;
+border:2 outset buttonhighlight;
+}
+.menuitems {
+padding-left:5px;
+padding-right:10px;
+}
+
+BODY, TR, TD, P, DIV, SPAN, CENTER, UL, OL, DL, DD { font-size: 9pt; color: #004137; font-family: tahoma,arial,helvetica,geneva,sans-serif;}
+
+A { 						/* Style for anchors */
+	text-decoration:none; color:#000000; cursor:hand; font-size: 10pt; }
+A:hover { 					/* Style for anchors */
+	text-decoration:underline; color:#000000; cursor:hand; }
+A.sel { 					/* Style for selected links */
+	color:#000000; background-color:#c1cdce;  padding-right:4px; }
+A.sel:hover { 					/* Style for anchors */
+	text-decoration:underline; background-color:#c1cdce; color:#000000; cursor:hand; }
+A.selback { 						/* Style for anchors */
+	text-decoration:none; color:#000000; cursor:hand; }
+
+BIG { font-weight: bold; font-size: 10pt; color: #0A748A; font-family: tahoma,arial,helvetica,geneva,sans-serif;}
+.dt { font-size: 8pt; color: #000000; font-weight: bold; font-family: tahoma,arial,helvetica,geneva,sans-serif; padding: 10px 10px 50px 10px;}
+#yellow,ul{color:#FFB00F}
+

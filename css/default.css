@@ -1,0 +1,46 @@
+body {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+	background: #ffffff; 
+	color: #000000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+td {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+div {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+
+div.content 
+{
+	margin: 4px;
+}
+
+div.text 
+{
+	margin-left: 16px;
+	margin-right: 16px;
+}
+
+div.comment {
+	background-color: #CECFCE;
+	padding: 4;
+	border: 1 solid #9C9A9C;
+}
+
+div.definition {
+	background-color: #CECFCE;
+	padding: 4;
+	border: 1 solid #9C9A9C;
+}
+
+pre 
+{
+	margin: 0px;
+}

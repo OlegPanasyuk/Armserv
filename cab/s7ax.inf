@@ -1,0 +1,50 @@
+[Version]
+Signature="$Chicago$"
+AdvancedINF=2.5
+
+[DefaultInstall]
+CopyFiles=install.files, inffile
+RegisterOCXs=RegisterFiles
+
+[DefaultInstall.nt]
+CopyFiles=install.files, inffile
+RegisterOCXs=RegisterFiles
+
+[DefaultUninstall]
+cleanup=1
+UnRegisterOCXs=UnRegisterFiles
+
+[strings]
+VersionNumber = "1.0.0.1"
+VersionMajor = "1"
+VersionMinor = "0"
+DisplayVersion = "1"
+ProductName = "s7ax Control"
+LocaleID = "EN"
+
+[RegisterFiles]
+%11%\s7ax.ocx
+
+[UnRegisterFiles]
+%11%\s7ax.ocx
+
+[DestinationDirs]
+install.files=11
+inffile=17
+
+[install.files]
+s7ax.ocx,,,33
+
+[inffile]
+s7ax.inf,,,33
+
+[s7ax.ocx]
+file-win32-x86=thiscab
+RegisterServer=Yes
+FileVersion=1.0.0.1
+
+[SourceDisksNames]
+1="default","s7ax.cab",1
+
+[SourceDisksFiles]
+s7ax.ocx=1

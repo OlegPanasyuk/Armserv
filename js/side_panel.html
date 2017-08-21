@@ -1,0 +1,87 @@
+<!DOCTYPE html> 
+<html lang="ru">
+<head>
+	<meta charset="utf-8" />
+	<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+	<style>
+		/*общий блок*/
+		.slide_panel_wrap {
+		margin:40px auto;
+		width:600px;
+		position:relative; /*обязательное свойство*/
+		overflow:hidden; /*обязательное свойство*/
+		}
+		
+		/*элементы левой панели*/
+		.left_panel {
+		margin-left:-200px; /*обязательное свойство*/
+		padding:20px; 
+		width:160px; 
+		position:relative; /*обязательное свойство*/
+		top:0; /*обязательное свойство*/
+		left:0; /*обязательное свойство*/
+		background:#fcfcfc;
+		}
+		.left_panel p.open {
+		width:40px;
+		height:160px;
+		position:absolute; /*обязательное свойство*/
+		top:10px; /*обязательное свойство*/
+		left:200px; /*обязательное свойство*/
+		background:url(booton.png) no-repeat;
+		cursor:pointer;
+		}	
+		
+		/*элементы правой панели*/
+		.right_panel {
+		margin-right:-200px; /*обязательное свойство*/
+		padding:20px; 
+		width:160px; 
+		position:absolute; /*обязательное свойство*/
+		top:0; /*обязательное свойство*/
+		right:0; /*обязательное свойство*/
+		background:#fcfcfc;	
+		}		
+		.right_panel p.open {
+		width:40px;
+		height:160px;
+		position:absolute; /*обязательное свойство*/
+		top:10px; /*обязательное свойство*/
+		right:200px; /*обязательное свойство*/
+		background:url(booton.png) no-repeat;
+		cursor:pointer;		
+		}
+	</style>
+	<script>
+		$(document).ready(function(){	
+			/*left panel*/
+			$("div.left_panel p.open").toggle(function(){
+				$("div.left_panel").animate({left:'205px'},500);}, function() {
+				$("div.left_panel").animate({left:0},500);
+			});
+			
+			/*right panel*/
+			$("div.right_panel p.open").toggle(function(){
+				$("div.right_panel").animate({right:'205px'},500);}, function() {
+				$("div.right_panel").animate({right:0},500);
+			});			
+		});	
+	</script>
+</head>
+<body>
+	<div class="slide_panel_wrap">	
+		<div class="left_panel">
+			<p class="open"></p>
+			<p>В этом блоке, рассположеном слева может содержаться любой контент.</p>
+			<p>В этом блоке, рассположеном слева может содержаться любой контент. В этом блоке, рассположеном слева может содержаться любой контент.</p>
+			<p>В этом блоке, рассположеном слева может содержаться любой контент.</p>
+		</div>
+		<div class="right_panel">
+			<p class="open"></p>
+			<p>В этом блоке, рассположеном справа может содержаться любой контент.</p>
+			<p>В этом блоке, рассположеном справа может содержаться любой контент. В этом блоке, рассположеном справа может содержаться любой контент.</p>
+			<p>В этом блоке, рассположеном справа может содержаться любой контент.</p>
+		</div>		
+	</div>
+</body>
+</html>
