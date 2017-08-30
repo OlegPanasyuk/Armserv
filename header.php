@@ -1,6 +1,7 @@
-п»ї<html xmlns="http://www.w3.org/TR/REC-html40">
+<html xmlns="http://www.w3.org/TR/REC-html40">
 <head>
 <title>header</title>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
 <!--<META HTTP-EQUIV="Refresh" content="10;URL=header.php">-->
 <script language="JavaScript" src="js/xml.js"></script>
 <style type="text/css">
@@ -21,11 +22,8 @@ input {
 	font-size:10px;
 	position: relative;
 	top:-5;
-	
 }
 </style>
-
-
 <script>
 function click() {
 event.cancelBubble = true;
@@ -35,11 +33,10 @@ event.returnValue = false;
 </script>
 </head>
 <body onload="initAll()" bgcolor="#d2b48c" text="white" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0">
-
+<a href="settings2.php" style="z-index:50; position: relative; float:right; padding: 3px;" target="frSheet"><img alt="Настройки" src="/images/options-ico4.png" height="24" style="border: none;"></a>
 <img src="images/logo.png" alt=""  height="30" border="0" style="z-index:50; position: relative; float:right;">
 <img src="images/head.png" alt="" width="100%" height="30" border="0" style="z-index:-1; position: absolute;  top: 0px;">
-<div style="z-index:51; position: relative;  top: 0px; float:right; left:0px; font: 12px; color:black; text-align:center;" id="testdiv3">8(0162) 21 65 42, 20 73 43<br/> Р§Р°СЃС‚РЅРѕРµ РїСЂРµРґРїСЂРёСЏС‚РёРµ "РђРР Р­РљРЎ"</div>
-
+<div style="z-index:51; position: relative;  top: 0px; float:right; left:0px; font: 12px; color:black; text-align:center;" id="testdiv3">8(0162) 21 65 42, 20 73 43<br/> Частное предприятие "АИРЭКС"</div>
 <script>
 var initial = 0;
 function fLoadScript(url,postData) { 
@@ -86,7 +83,7 @@ nowvalues.value = roundPlus(znachenie.chislo, 1);
 //values.value = znachenie.premax;
 //return req.responseText; 
 }
- function roundPlus(x, n) { //x - С‡РёСЃР»Рѕ, n - РєРѕР»РёС‡РµСЃС‚РІРѕ Р·РЅР°РєРѕРІ
+ function roundPlus(x, n) { //x - число, n - количество знаков
   if(isNaN(x) || isNaN(n)) return false;
   var m = Math.pow(10,n);
   return Math.round(x*m)/m;
@@ -150,14 +147,14 @@ fLoadScript2("getTime.php","GET");
 
 function pushButton()
 {
-    if (getUSPDTime.value == "Р’СЂРµРјСЏ РЈРЎРџР”")
+    if (getUSPDTime.value == "Время УСПД")
 	{
-		getUSPDTime.value = "Р’СЂРµРјСЏ РЈРЎРџР”"
+		getUSPDTime.value = "Время УСПД"
 		myInterval=setInterval('USPD_Time()',1000);
 	}
 	else
 	{	
-		getUSPDTime.value = "Р’СЂРµРјСЏ РЈРЎРџР”"
+		getUSPDTime.value = "Время УСПД"
 		clearInterval(myInterval)
 	}
 }
@@ -209,8 +206,8 @@ myWindow.document.write("</title><bgsound src='include/Sirena.mp3' loop='-1'></h
 myWindow.document.write("<script>");
 myWindow.document.write("function closeW() {window.close();}"); 
 myWindow.document.write("<\/script>");
-myWindow.document.write("Сѓ  РІР°СЃ РїСЂРёРІС‹С€РµРЅ Р»РёРјРёС‚ РјРѕС‰РЅРѕСЃС‚Рё.");
-myWindow.document.write("<button onclick = 'closeW()'>Р—Р°РєСЂС‹С‚СЊ</button>");
+myWindow.document.write("у  вас привышен лимит мощности.");
+myWindow.document.write("<button onclick = 'closeW()'>Закрыть</button>");
 myWindow.document.write("</body></html>");
 myWindow.document.close();
 	}
@@ -230,8 +227,8 @@ myWindow.document.write("</title><bgsound src='include/Sirena.mp3' loop='-1'></h
 myWindow.document.write("<script>");
 myWindow.document.write("function closeW() {window.close();}"); 
 myWindow.document.write("<\/script>");
-myWindow.document.write("Сѓ  РІР°СЃ РїСЂРёРІС‹С€РµРЅ Р»РёРјРёС‚ РјРѕС‰РЅРѕСЃС‚Рё.");
-myWindow.document.write("<button onclick = 'closeW()'>Р—Р°РєСЂС‹С‚СЊ</button>");
+myWindow.document.write("у  вас привышен лимит мощности.");
+myWindow.document.write("<button onclick = 'closeW()'>Закрыть</button>");
 myWindow.document.write("</body></html>");
 myWindow.document.close();
 	 }
@@ -266,11 +263,11 @@ window.g_iIEVer=fnGetIEVer();
 
 </script>
 <!--<div name="currtime" id="currtime" style="font-size:12px;font-weight:bold;font:color:#FFFFFF;border:none;position:absolute;top:10;left:10;z-index:+10;" ></div>-->
-<input type="button" name="getUSPDTime" value="Р’СЂРµРјСЏ РЈРЎРџР”" onclick="pushButton()" style="font-size:10px;position:absolute;top:7;left:10;z-index:+10;width:105px;">
+<input type="button" name="getUSPDTime" value="Время УСПД" onclick="pushButton()" style="font-size:10px;position:absolute;top:7;left:10;z-index:+10;width:105px;">
 
 
 <?php
-$filename = "include/options.ini";$options = @parse_ini_file($filename)or die("РќРµРІРѕР·РјРѕР¶РЅРѕ РїСЂРѕС‡РёС‚Р°С‚СЊ С„Р°Р№Р» РЅР°СЃС‚СЂРѕРµРє!");$Max = $options['MaxVal'];
+$filename = "include/options.ini";$options = @parse_ini_file($filename)or die("Невозможно прочитать файл настроек!");$Max = $options['MaxVal'];
 $PreMax = $options['PreMax'];
 $h1 = $options['H1'];
 $h2 = $options['H2'];
@@ -291,9 +288,9 @@ echo "
  </script>
 <div style ='".$vis."' id='alert' >
 <input type='checkbox' id='ifcontrol'>
-<label for='controltext'> РєРѕРЅС‚СЂРѕР»СЊРЅР°СЏ РјРѕС‰РЅРѕСЃС‚СЊ</label><input id='controltext' type='text' value='0'>
-<label for='nowvalue'> С‚РµРєСѓС‰Р°СЏ РјРѕС‰РЅРѕСЃС‚СЊ </label><input id='nowvalue' type='text' value='0'>
-<label for='maxvalue'> РјР°РєСЃРёРјР°Р»СЊРЅР°СЏ РјРѕС‰РЅРѕСЃС‚СЊ </label><input name='maxvalue' id='maxvalue' type='text' value='0'>
+<label for='controltext'> контрольная мощность</label><input id='controltext' type='text' value='0'>
+<label for='nowvalue'> текущая мощность </label><input id='nowvalue' type='text' value='0'>
+<label for='maxvalue'> максимальная мощность </label><input name='maxvalue' id='maxvalue' type='text' value='0'>
 </div>
 <script>
 document.getElementById('controltext').value=".$Max.";
@@ -306,5 +303,7 @@ document.getElementById('controltext').value=".$Max.";
 </div>
 
 <div id="time"></div>
+
+
 </body>
-</html>
+</html></script>

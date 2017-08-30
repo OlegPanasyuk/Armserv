@@ -34,7 +34,8 @@ TD
 </style>
 	<link rel="stylesheet" href="css/j.css"></link>
 <?php
-echo "<SCRIPT language=\"JavaScript1.2\">var tab=".$_GET["tab"]."</SCRIPT>";
+echo "<SCRIPT language=\"JavaScript1.2\">var tab=".$_GET["tab"].";\n";
+echo "var halfmtab = ".$_GET["halfmtab"].";</SCRIPT>";
 echo "<SCRIPT language=\"JavaScript1.2\" src=\"js/progressbar.js\"></SCRIPT>\n";
 echo "<script language=\"JavaScript1.2\" src=\"js/control_f2.js\"></script>\n";
 echo "<script language=\"JavaScript1.2\">formatData.style.display='none';</script>\n";
@@ -82,6 +83,8 @@ $n_obj = $_GET["nobj"];
 $adr = $_GET["adr"];
 $maxp = $_GET["maxp"];
 $edizm = $_GET["edizm"];
+$halfmtab = $_GET["halfmtab"];
+
 if (!isset($date_2)) $date_2=$dc;
 if (!isset($pw_en)) $pw_en=$disp;
 
@@ -137,6 +140,7 @@ echo "window.document.forms[0].lid.value='$lid';\n";
 echo "window.document.forms[0].node.value='$node';\n";
 echo "window.document.forms[0].maxp.value='$maxp';\n";
 echo "window.document.forms[0].edizm.value='$edizm';\n";
+echo "window.document.forms[0].halfmtab.value='$halfmtab'\n";
 if ($disp!=1){
 				echo "window.document.topmenu.maxp.style.visibility='hidden';\n";
 				echo "maxp_lab.innerText='';\n";
@@ -339,6 +343,8 @@ function CalcData($pw_en,$date_1,$date_2,$uid,$n_obj,$adr,$table)
   global $maxp;
   global $colname;
   global $edizm;
+  global $halfmtab;
+  global $name;
   $a;
   $pwr_str='';$nrg_str='';
 
@@ -438,12 +444,12 @@ function CalcData($pw_en,$date_1,$date_2,$uid,$n_obj,$adr,$table)
 			$i++;
 	  }
 	 } 
-	PrintData($pw_en,$n_day,$date_,$izm,$flag);
+	PrintData($pw_en,$n_day,$date_,$izm,$flag,$halfmtab);
 //}	
 //===============================================================================			
 }
 
-function PrintData($pw_en,$n_day,$date_,$izm,$flag)
+function PrintData($pw_en,$n_day,$date_,$izm,$flag,$halfmtab)
 {
   global $type_izm;
   global $pwr;
@@ -452,6 +458,8 @@ function PrintData($pw_en,$n_day,$date_,$izm,$flag)
   global $num_day;
   global $name; global $uid; global $n_obj;global $adr;global $pid; global $lid; global $node;
   global $edizm;
+  global $maxp;
+
   for ($i=0;$i<count($date_);$i++)
   {
   $num_day++;
@@ -459,7 +467,7 @@ function PrintData($pw_en,$n_day,$date_,$izm,$flag)
   list ($ac_year,$ac_month,$ac_day) = explode ("-",$date_[$n]);  
 	$date_output=$ac_day.".".$ac_month.".".$ac_year;
  echo "<tr>\n";
- echo "<td class='x22' align='center' style='font-weight:700;text-align:center;border-top:none;' id='".$date_output."'>".$date_output."</td>\n";
+ echo "<td class='x22' align='center' style='font-weight:700;text-align:center;border-top:none;' id='".$date_output."'><a href='/form1.php?tab=".$halfmtab."&disp=".$pw_en."&edizm=".$edizm."&maxp=".$maxp."&dc=".$date_output."&iname=".$name."&id=".$uid."&pid=".$pid."&lid=".$lid."&node=".$node."&nobj=".$n_obj."&adr=".$adr."&framenode=form1&parentFrame=form2'>".$date_output."</a></td>\n";
 	if ($pw_en==1)
 	for ($j=(min($nrg)-1);$j<max($nrg);$j++)
 	 {

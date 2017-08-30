@@ -2,14 +2,14 @@
 
 <head>
 <meta http-equiv=Content-Type content="text/html; charset=windows-1251">
-<title>АРМ Энергетика</title>
+<title>АРМ Энерегетика</title>
 <?php
  $filename="include/tabs.ini";
  $filename2="include/links.ini";
  $scriptCode="";
  $linkCode="";
- $options = parse_ini_file($filename) or die("РќРµРІРѕР·РјРѕР¶РЅРѕ РїСЂРѕС‡РёС‚Р°С‚СЊ С„Р°Р№Р» tabs.ini!");
- $options2 = parse_ini_file($filename2) or die("РќРµРІРѕР·РјРѕР¶РЅРѕ РїСЂРѕС‡РёС‚Р°С‚СЊ С„Р°Р№Р» links.ini!");
+ $options = parse_ini_file($filename) or die("Невозможно прочитать файл tabs.ini!");
+ $options2 = parse_ini_file($filename2) or die("Невозможно прочитать файл links.ini!");
 
  $c_mTabs = $options['c_mTabs'];
  $c_lTabs = $options['c_lTabs'];
@@ -33,36 +33,47 @@
  $activeTabs_sett=explode(",",$c_strTabs_sett);
  $activeTabs_heat=explode(",",$c_strTabs_heat);
 
+ $halfmtab = 0;
+
  for ($i=0;$i<$c_mTabs;$i++)
  {
-	$c_rgszSh[$i] = $options['c_rgszSh_'.$i];
+  $c_rgszSh[$i] = $options['c_rgszSh_'.$i];
  }
 
  for ($i=0;$i<$c_mTabs;$i++)
  {
-	$c_link[$i] = $options2['c_link_'.$i];
+  $c_link[$i] = $options2['c_link_'.$i];
  }
-// РћР±С‹С‡РЅРѕРµ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ Р·Р°РєР»Р°РґРѕРє
+// Обычное отображение закладок
   $scriptCode.="
    var c_lTabs=".$c_lTabs.";
    var c_rgszSh=new Array(c_lTabs);\n";
  for ($i=0;$i<$c_lTabs;$i++)
  {
-	$scriptCode.= "c_rgszSh[".$i."]=\"".$c_rgszSh[$activeTabs[$i]]."\";\n";
-	$linkCode.="<link id='shLink' href='".$c_link[$activeTabs[$i]].".php?tab=".$i."'>\n";
+  $scriptCode.= "c_rgszSh[".$i."]=\"".$c_rgszSh[$activeTabs[$i]]."\";\n";
+  $linkCode.="<link id='shLink' href='".$c_link[$activeTabs[$i]].".php?tab=".$i."'>\n";
  }
 
-// РћС‚РѕР±СЂР°Р¶РµРЅРёРµ РґР»СЏ СЌР»РµРєС‚СЂРѕСЌРµРЅРµСЂРіРёРё
+// Отображение для электроэенергии
  $scriptCode.="
    var c_lTabs_energy=".$c_lTabs_energy.";
    var c_rgszSh_energy=new Array(c_lTabs_energy);\n";
  for ($i=0;$i<$c_lTabs_energy;$i++)
  {
   $scriptCode.= "c_rgszSh_energy[".$i."]=\"".$c_rgszSh[$activeTabs_energy[$i]]."\";\n";
-  $linkCode.="<link id='shLink_energy' href='".$_SERVER['REQUEST_URI']."".$c_link[$activeTabs_energy[$i]].".php?tab=".$i."'>\n";
+  if ($c_link[$activeTabs_energy[$i]] == "form1") {
+      $linkCode.="<link id='shLink_energy' href='".$_SERVER['REQUEST_URI']."".$c_link[$activeTabs_energy[$i]].".php?tab=".$i."'>\n";
+      $halfmtab = $i;
+  } else {
+      if ($c_link[$activeTabs_energy[$i]] == "form2") {
+        $linkCode.="<link id='shLink_energy' href='".$_SERVER['REQUEST_URI']."".$c_link[$activeTabs_energy[$i]].".php?tab=".$i."&halfmtab=".$halfmtab."'>\n";
+      } else {
+        $linkCode.="<link id='shLink_energy' href='".$_SERVER['REQUEST_URI']."".$c_link[$activeTabs_energy[$i]].".php?tab=".$i."'>\n";
+      }
+  }
  }
 
-// РћС‚РѕР±СЂР°Р¶РµРЅРёРµ РґР»СЏ РІРѕРґС‹
+// Отображение для воды
  $scriptCode.="
    var c_lTabs_water=".$c_lTabs_water.";
    var c_rgszSh_water=new Array(c_lTabs_water);\n";
@@ -71,7 +82,7 @@
   $scriptCode.= "c_rgszSh_water[".$i."]=\"".$c_rgszSh[$activeTabs_water[$i]]."\";\n";
   $linkCode.="<link id='shLink_water' href='".$_SERVER['REQUEST_URI']."".$c_link[$activeTabs_water[$i]].".php?tab=".$i."'>\n";
  }
- //РћС‚РѕР±СЂР°Р¶РµРЅРёРµ РґР»СЏ РїР°РїРѕРє
+ //Отображение для папок
  $scriptCode.="
    var c_lTabs_folder=".$c_lTabs_folder.";
    var c_rgszSh_folder=new Array(c_lTabs_folder);\n";
@@ -81,7 +92,7 @@
   $linkCode.="<link id='shLink_folder' href='".$_SERVER['REQUEST_URI']."".$c_link[$activeTabs_folder[$i]].".php?tab=".$i."'>\n";
  }
 
-//РћС‚РѕР±СЂР°Р¶РµРЅРёРµ РґР»СЏ РЅР°СЃС‚СЂРѕРµРє
+//Отображение для настроек
  $scriptCode.="
    var c_lTabs_sett=".$c_lTabs_sett.";
    var c_rgszSh_sett=new Array(c_lTabs_sett);\n";
@@ -91,7 +102,7 @@
   $linkCode.="<link id='shLink_sett' href='".$_SERVER['REQUEST_URI']."".$c_link[$activeTabs_sett[$i]].".php?tab=".$i."'>\n";
  }
 
-//РћС‚РѕР±СЂР°Р¶РµРЅРёРµ РґР»СЏ С‚РµРїР»Р°
+//Отображение для тепла
  $scriptCode.="
    var c_lTabs_heat=".$c_lTabs_heat.";
    var c_rgszSh_heat=new Array(c_lTabs_heat);\n";
@@ -127,16 +138,16 @@ window.moveTo(0,0);}
 
  var g_iShCur;
  var g_rglTabX=new Array(c_lTabs);
- var typeOfTabs = 0; // С‚РёРї 0 - РґР»СЏ СЃС‚СЌРЅРґР° 1 - РґР»СЏ СЌР»РµРєС‚СЂРѕСЌРЅРµСЂРіРёРё 2- РґР»СЏ РІРѕРґС‹ - 3 РґР»СЏ РїР°РїРѕРє
+ var typeOfTabs = 0; // тип 0 - для стэнда 1 - для электроэнергии 2- для воды - 3 для папок
 
 function fnGetIEVer()
 {
-	var ua=window.navigator.userAgent
-	var msie=ua.indexOf("MSIE")
-	if (msie>0 && window.navigator.platform=="Win32")
-		return parseInt(ua.substring(msie+5,ua.indexOf(".", msie)));
-	else
-		return 0;
+  var ua=window.navigator.userAgent
+  var msie=ua.indexOf("MSIE")
+  if (msie>0 && window.navigator.platform=="Win32")
+    return parseInt(ua.substring(msie+5,ua.indexOf(".", msie)));
+  else
+    return 0;
 }
 
 function fnBuildFrameset()
@@ -204,7 +215,7 @@ function testFn(node,obj,addr,lvl) {
    }
 }
 
-function fnBuildTabStrip(name_L , typeOfTab) //c_rgszSh - РјР°СЃСЃРёРІ СЃ РЅР°Р·РІР°РЅРёСЏРјРё РІРєР»Р°РґРѕРІ c_lTabs - РєРѕР»РІРѕ РІРєР»Р°РґРѕРє
+function fnBuildTabStrip(name_L , typeOfTab) //c_rgszSh - массив с названиями вкладов c_lTabs - колво вкладок
 {
  typeOfTabs = typeOfTab;
  var name_link = "shLink" + name_L;
@@ -443,7 +454,7 @@ window.g_iIEVer=fnGetIEVer();
 <frameset>
  <noframes>
 <body onLoad="expand()">
-   <p>Р­С‚Р° СЃС‚СЂР°РЅРёС†Р° СЃРѕРґРµСЂР¶РёС‚ С„СЂРµР№РјС‹, РЅРѕ РІР°С€ Р±СЂР°СѓР·РµСЂ С„СЂРµР№РјС‹ РЅРµ РїРѕРґРґРµСЂР¶РёРІР°РµС‚ </p>
+   <p></p>
   </body>
  </noframes>
 </frameset>

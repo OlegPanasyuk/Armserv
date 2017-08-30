@@ -1,18 +1,17 @@
-<?php
+<?php 
   ///////////////////////////////////////////////////
   // Устанавливаем соединение с базой данных
- require_once("include/mysql.php");
   // Если пользователь не авторизовался - авторизуемся
   if(!isset($_SERVER['PHP_AUTH_USER'])) 
   { 
-    Header("WWW-Authenticate: Basic realm=\"Редактирование структуры\""); 
-    Header("HTTP/1.0 401 Unauthorized"); 
+    Header("WWW-Authenticate: Basic realm=\"Настройки\"",false); 
+    Header("HTTP/1.0 401 Unauthorized",false); 
     exit(); 
   } 
   else 
   { 
-   
     // Утюжим переменные $_SERVER['PHP_AUTH_USER'] и $_SERVER['PHP_AUTH_PW'], чтобы мышь не проскочила
+    require_once("include/mysql.php");
     if (!get_magic_quotes_gpc())
     {
       $_SERVER['PHP_AUTH_USER'] = mysql_escape_string($_SERVER['PHP_AUTH_USER']);

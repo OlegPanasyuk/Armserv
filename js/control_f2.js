@@ -52,6 +52,7 @@ control+="<input type='hidden' name='lid' value='-1' size=2'>";
 control+="<input type='hidden' name='node' value='-1' size=2'>";
 control+="<input type='hidden' name='nobj' value='-1' size=2'>";
 control+="<input type='hidden' name='adr' value='-1' size=2'>";
+control+="<input type='hidden' name='halfmtab' value='-1' size=2>";
 control+="<input type='hidden' name='frameName' id='frameName' value='form2'>";
 control+="  </TD>";
 control+="</tr></table></FIELDSET>";
@@ -120,6 +121,7 @@ function checkID()
 	window.document.topmenu.nobj.value=window.parent.toc.nobj.value;
 	window.document.topmenu.node.value=window.parent.toc.ntype.value;
 	window.document.topmenu.adr.value=window.parent.toc.adr.value;
+	window.document.topmenu.halfmtab.value=halfmtab;
 	var id=window.document.topmenu.id.value;
 	var pid=window.document.topmenu.pid.value;
 	var lid=window.document.topmenu.lid.value;

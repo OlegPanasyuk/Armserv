@@ -24,6 +24,7 @@ if (toDO=='insert')
 } 
 if (toDO=='update') node=ntype.value;
 url="../sql.php?id="+item_id.value+"&pid="+par_id.value+"&level="+level.value+"&name="+item_name.value+"&todo="+toDO+"&icon="+icon+"&node="+node;
+if (toDO == 'sett') url = "../settings2.php";
 window.parent.frSheet.src=url;
 window.parent.frames[2].location.href=url;
 window.parent.frames[2].focus;
@@ -34,7 +35,7 @@ function dopopup(x,y)
  if(isie) 
  {
  var html="";
- html+='<TABLE id="popup2" name="222" STYLE="border:1pt solid #808080" BGCOLOR="#CCCCCC" WIDTH="140" HEIGHT="200" CELLPADDING="0" CELLSPACING="1">';
+ html+='<TABLE id="popup2" name="222" STYLE="border:1pt solid #808080" BGCOLOR="#CCCCCC" WIDTH="140" HEIGHT="300" CELLPADDING="0" CELLSPACING="1">';
  html+='<STYLE TYPE="text/css">\n';
  html+='a:link {text-decoration:none;font-family:Arial;font-size:8pt;}\n';
  html+='a:visited {text-decoration:none;font-family:Arial;font-size:8pt;}\n';
@@ -49,10 +50,12 @@ function dopopup(x,y)
  html+='<TR><TD STYLE="border:1pt solid #CCCCCC;cursor:hand;" ID="i10" ONMOUSEOVER="document.all.i10.style.background=\'#CFD6E8\';document.all.i10.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i10.style.background=\'#CCCCCC\';document.all.i10.style.border=\'1pt solid #CCCCCC\';" ONCLICK="window.parent.go_to(\'update\',\'\',-1)"><img src="img/treenode_edit.gif" alt="" width="24" height="24" border="0">Редактировать</TD></TR>';
  html+='<TR><TD STYLE="border:1pt solid #CCCCCC;"><IMG SRC="../images/pixel.gif" WIDTH="130" HEIGHT="1"></TD></TR>';
  html+='<TR><TD STYLE="border:1pt solid #CCCCCC;cursor:hand;" ID="i11" ONMOUSEOVER="document.all.i11.style.background=\'#CFD6E8\';document.all.i11.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i11.style.background=\'#CCCCCC\';document.all.i11.style.border=\'1pt solid #CCCCCC\';" ONCLICK="window.parent.go_to(\'info\',\'\',0)"><img src="img/about.gif" alt="" width="24" height="24" border="0">Справка</TD></TR>';
+ html+='<TR><TD STYLE="border:1pt solid #CCCCCC;"><IMG SRC="../images/pixel.gif" WIDTH="130" HEIGHT="1"></TD></TR>';
+ html+='<TR><TD STYLE="border:1pt solid #CCCCCC;cursor:hand;" ID="i12" ONMOUSEOVER="document.all.i12.style.background=\'#CFD6E8\';document.all.i11.style.border=\'1pt solid #737B92\';" ONMOUSEOUT="document.all.i11.style.background=\'#CCCCCC\';document.all.i11.style.border=\'1pt solid #CCCCCC\';" ONCLICK="window.parent.go_to(\'sett\',\'\',0)"><img src="img/about.gif" alt="" width="24" height="24" border="0">Настройки</TD></TR>';
  html+='</TABLE>';
 	var oPopupBody = oPopup.document.body;
 	oPopupBody.innerHTML = html;
-	oPopup.show(x, y, 140, 200, document.body);
+	oPopup.show(x, y, 140, 300, document.body);
  }
  return false;
 }

@@ -1,19 +1,18 @@
-п»ї<?php
+<?php
   ///////////////////////////////////////////////////
-  // РњРѕРґСѓР»СЊ Р±РµР·РѕРїР°СЃРЅРѕСЃС‚Рё
+  // Модуль безопасности
   require_once("security_mod.php");
 ?><!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-	<title>РќР°СЃС‚СЂРѕР№РєРё СЃРѕРµРґРёРЅРµРЅРёСЏ</title>
+  <title>Настройки соединения</title>
   <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
   <meta http-equiv="Cache-Control" content="no-cache"/>
-  <BASE target="frSheet">
-  <!--<script language="JavaScript" src="js/tabs.js">
+  <script language="JavaScript" src="js/tabs.js">
   
   
   </script>
-  -->
+  
 <script language="JavaScript">
 function click() {
 event.cancelBubble = true;
@@ -26,17 +25,17 @@ function validator(ip,port,tout,freq,vers)
  var d = ip.split('.');
  for (x=0; x<4; x++) 
   {
- 	if ( isNaN(d[x]) || (d[x]<0) || (d[x]>255) ) 
-	  {alert('РќРµРІРµСЂРЅС‹Р№ IP-Р°РґСЂРµСЃ');return false;}
-  }	
+  if ( isNaN(d[x]) || (d[x]<0) || (d[x]>255) ) 
+    {alert('Неверный IP-адрес');return false;}
+  } 
   if (isNaN(port) || (port<1500))
-	  {alert('РќРµРІРµСЂРЅС‹Р№ UDP-РїРѕСЂС‚');return false;}
+    {alert('Неверный UDP-порт');return false;}
   if (isNaN(tout) || (tout<0) || (tout>300))
-	  {alert('РќРµРІРµСЂРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ С‚Р°Р№РјР°СѓС‚Р° Р·Р°РїСЂРѕСЃР°');return false;}
+    {alert('Неверное значение таймаута запроса');return false;}
   if (isNaN(freq) || (freq<10) || (freq>3000))
-	  {alert('РќРµРІРµСЂРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ С‡Р°СЃС‚РѕС‚С‹ Р·Р°РїСЂРѕСЃР°');return false;}
+    {alert('Неверное значение частоты запроса');return false;}
 //  if (isNaN(vers) || ((vers!=2003) && (vers!=2007)))
-//	  {alert('РќРµРІРµСЂРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РїР°СЂР°РјРµС‚СЂР° "РЎРѕРІРјРµСЃС‚РёРјРѕСЃС‚СЊ СЃ MS Excel"');return false;}
+//    {alert('Неверное значение параметра "Совместимость с MS Excel"');return false;}
  document.params.submit();
 }
 </script>
@@ -47,84 +46,84 @@ function validator(ip,port,tout,freq,vers)
 $filename="include/options.ini";
 ?>
 <?php 
- // РЎС‡РёС‚С‹РІР°РµРј С„Р°Р№Р» РІ РјР°СЃСЃРёРІ 
-      $file = file($filename) or die("РќРµРІРѕР·РјРѕР¶РЅРѕ РїСЂРѕС‡РёС‚Р°С‚СЊ С„Р°Р№Р» РЅР°СЃС‚СЂРѕРµРє!"); 
-        // РџРµСЂРµР±РёСЂР°РµРј СЃС‚СЂРѕРєРё С„Р°Р№Р»Р° 
+ // Считываем файл в массив 
+      $file = file($filename) or die("Невозможно прочитать файл настроек!"); 
+        // Перебираем строки файла 
       for($a=0;$a<count($file);$a++) 
       {  
           $pat_depart = "^((\[)([[:alpha:][:space:]]+)(\]))$"; 
           $str = Trim($file[$a]); 
           if(eregi($pat_depart,$str)) 
           { 
-            // Р­С‚Р° СЃС‚СЂРѕРєР° - РЅР°Р·РІР°РЅРёРµ СЂР°Р·РґРµР»Р° 
+            // Эта строка - название раздела 
           } 
       } 
     ?> 
 
 <?php 
- // РЎС‡РёС‚С‹РІР°РµРј С„Р°Р№Р» РІ РјР°СЃСЃРёРІ 
-      $file = file($filename) or die("РќРµРІРѕР·РјРѕР¶РЅРѕ РїСЂРѕС‡РёС‚Р°С‚СЊ С„Р°Р№Р» РЅР°СЃС‚СЂРѕРµРє!"); 
-        // РџРµСЂРµР±РёСЂР°РµРј СЃС‚СЂРѕРєРё С„Р°Р№Р»Р° 
+ // Считываем файл в массив 
+      $file = file($filename) or die("Невозможно прочитать файл настроек!"); 
+        // Перебираем строки файла 
       for($a=0;$a<count($file);$a++) 
       {  
- 		$pat_param = "^([[:space:]]*)([[:alnum:]_\.]+)([[:space:]]*)(=)"; 
+    $pat_param = "^([[:space:]]*)([[:alnum:]_\.]+)([[:space:]]*)(=)"; 
         $str = Trim($file[$a]); 
-	    if(eregi($pat_param,$str)) 
-	    { 
-     	 // РќР°С€Р»Рё СЃС‚СЂРѕРєСѓ СЃ РїР°СЂР°РјРµС‚СЂРѕРј РЅР°СЃС‚СЂРѕР№РєРё 
-	    } 
-	  }
+      if(eregi($pat_param,$str)) 
+      { 
+       // Нашли строку с параметром настройки 
+      } 
+    }
 ?> 
 
 <?php 
  function Ini_Params_From_String($str) 
   { 
-       // Р”РµР»РёРј СЃС‚СЂРѕРєСѓ РЅР° РЅР°Р·РІР°РЅРёРµ РїР°СЂР°РјРµС‚СЂР°  Рё РІСЃРµ РѕСЃС‚Р°Р»СЊРЅРѕРµ 
+       // Делим строку на название параметра  и все остальное 
     $k = explode('=',$str,2); 
-    $key = Trim($k[0]); // РќР°Р·РІР°РЅРёРµ РїР°СЂР°РјРµС‚СЂР° 
-    $val = Trim($k[1]); // РћСЃС‚Р°Р»СЊРЅР°СЏ С‡Р°СЃС‚СЊ СЃС‚СЂРѕРєРё 
-      // Р•СЃР»Рё Р·РЅР°С‡РµРЅРёРµ РїР°СЂР°РјРµС‚СЂР°  РЅР°С…РѕРґРёС‚СЃСЏ РІ РєР°РІС‹С‡РєР°С… 
+    $key = Trim($k[0]); // Название параметра 
+    $val = Trim($k[1]); // Остальная часть строки 
+      // Если значение параметра  находится в кавычках 
     if($val && $val{0} == '"') 
     { 
       $value = ''; 
       $pos = 1; 
       $len = StrLen($val); 
-        // РќР°Р№РґРµРј СЃС‚СЂРѕРєСѓ РјРµР¶РґСѓ РґРІРѕР№РЅС‹С… РєР°РІС‹С‡РµРє 
+        // Найдем строку между двойных кавычек 
       while($val{$pos} !== '"' && $pos<$len) 
       { 
         $value .= $val{$pos}; 
         $pos++; 
       } 
-        // Р’СЃСЏ СЃС‚СЂРѕРєР° РїРѕСЃР»Рµ Р·РЅР°С‡РµРЅРёСЏ РїР°СЂР°РјРµС‚СЂР° 
+        // Вся строка после значения параметра 
       $rest = trim(substr($val,$pos + 1)); 
-        // РќР°С…РѕРґРёРј РєРѕРјРјРµРЅС‚Р°СЂРёР№ 
+        // Находим комментарий 
       if(($pos = strpos($rest,";")) !== false) 
         $comment = substr($rest,$pos+1); 
       else 
         $comment = ''; 
     }      
-      // Р•СЃР»Рё Р·РЅР°С‡РµРЅРёРµ РїР°СЂР°РјРµС‚СЂР° СѓРєР°Р·Р°РЅРѕ Р±РµР· РєР°РІС‹С‡РµРє Рё РµСЃР»Рё РµСЃС‚СЊ РєРѕРјРјРµРЅС‚Р°СЂРёР№ 
+      // Если значение параметра указано без кавычек и если есть комментарий 
     elseif(substr_count($str,';')) 
     { 
       $v = explode(';',$k[1]); 
-      $value= Trim($v[0]); // Р—РЅР°С‡РµРЅРёРµ РїР°СЂР°РјРµС‚СЂР° 
-      $comment = Trim($v[1]); // РљРѕРјРјРµРЅС‚Р°СЂРёР№ 
+      $value= Trim($v[0]); // Значение параметра 
+      $comment = Trim($v[1]); // Комментарий 
     } 
-      // Р•СЃР»Рё Р·РЅР°С‡РµРЅРёРµ РїР°СЂР°РјРµС‚СЂР° СѓРєР°Р·Р°РЅРѕ Р±РµР· РєР°РІС‹С‡РµРє Рё РµСЃР»Рё РєРѕРјРјРµРЅС‚Р°СЂРёСЏ РЅРµС‚ 
+      // Если значение параметра указано без кавычек и если комментария нет 
     else 
     { 
       $value = Trim($k[1]); 
       $comment = ''; 
     } 
-    $ret[0] = $key; // РќР°Р·РІР°РЅРёРµ РїР°СЂР°РјРµС‚СЂР° 
-    $ret[1] = $value; // Р—РЅР°С‡РµРЅРёРµ РїР°СЂР°РјРµС‚СЂР° 
-    $ret[2] = $comment; // РљРѕРјРјРµРЅС‚Р°СЂРёР№ 
+    $ret[0] = $key; // Название параметра 
+    $ret[1] = $value; // Значение параметра 
+    $ret[2] = $comment; // Комментарий 
     return $ret;   
   } // function Ini_Params_From_String($str)
 ?> 
 <?php 
 /** 
-* @desc Р¤СѓРЅРєС†РёСЏ СѓР±РёСЂР°РµС‚ СЌРєСЂР°РЅРёСЂСѓСЋС‰РёРµ СЃР»РµС€Рё РёР· СЃС‚СЂРѕРєРё РёР»Рё РјР°СЃСЃРёРІР° 
+* @desc Функция убирает экранирующие слеши из строки или массива 
 * @param mixed $data 
 * @return void 
 */ 
@@ -139,7 +138,7 @@ function array_stripslashes (& $data )
         $data = stripcslashes($data);
     }
 }
-// Р•СЃР»Рё РјР°РіРёС‡РµСЃРєРёРµ РєР°РІС‹С‡РєРё РІРєР»СЋС‡РµРЅС‹, С‚Рѕ СѓР±РёСЂР°РµРј СЌРєСЂР°РЅРёСЂРѕРІР°РЅРёРµ
+// Если магические кавычки включены, то убираем экранирование
 if ( get_magic_quotes_gpc() )
 {
     if ( $_GET    ) array_stripslashes($_GET   );
@@ -154,15 +153,15 @@ function stripslashes2($string) {
 }
 
 $tab=$_GET['tab'];
- $file = file($filename) or die("РќРµРІРѕР·РјРѕР¶РЅРѕ РїСЂРѕС‡РёС‚Р°С‚СЊ С„Р°Р№Р» РЅР°СЃС‚СЂРѕРµРє!");      
+ $file = file($filename) or die("Невозможно прочитать файл настроек!");      
   echo "<form name='params' action='".$_SERVER['PHP_SELF']."?tab=".$tab."' method=post  target=\"_self\">\n"; 
   echo "<center>\n"; 
   echo "  <table cellpadding=2 cellspacing=1 bgcolor=#000000>\n"; 
   echo "  <tr style='text-align: center;font-family: tahoma; font-size: 12px;font-weight: bold;background-color: #FFD700;'>\n"; 
-  echo "    <td>в„–</td>\n"; 
-  echo "    <td>РџР°СЂР°РјРµС‚СЂ</td>\n"; 
-  echo "    <td>Р—РЅР°С‡РµРЅРёРµ</td>\n"; 
-  echo "    <td>РљРѕРјРјРµРЅС‚Р°СЂРёР№</td>\n"; 
+  echo "    <td>№</td>\n"; 
+  echo "    <td>Параметр</td>\n"; 
+  echo "    <td>Значение</td>\n"; 
+  echo "    <td>Комментарий</td>\n"; 
   echo "  </tr>\n"; 
   $cnt = 0; 
   for($a=0;$a<count($file);$a++) 
@@ -183,28 +182,28 @@ $tab=$_GET['tab'];
       echo "  <tr style='font-family: verdana; font-size: 12px;background-color: #F6F9F3;'>\n"; 
       echo "    <td align=center style='background-color: #E0E0E0'><b>$cnt</b></td>\n"; 
       echo "    <td style='font-weight:bold;'>$key</td>\n"; 
-	   if ($key=='Password')	$type='password'; 
-	  	else $type='text';
-	   if (!isset($_POST["opt_".$key]))
-		      echo "    <td><input type=$type size=20 maxlength=255 name='opt_".$key."' value=\"".HtmlSpecialChars($value)."\"></td>\n"; 
+     if ($key=='Password')  $type='password'; 
+      else $type='text';
+     if (!isset($_POST["opt_".$key]))
+          echo "    <td><input type=$type size=20 maxlength=255 name='opt_".$key."' value=\"".HtmlSpecialChars($value)."\"></td>\n"; 
        else
-	   		{
-		      if ($key=='Path')   echo "    <td><input type=$type size=20 maxlength=255 name='opt_".$key."' value=\"".stripslashes2($_POST["opt_".$key], '"$\\') ."\"></td>\n"; 
-			  else
-				  echo "    <td><input type=$type size=20 maxlength=255 name='opt_".$key."' value=\"".$_POST["opt_".$key]."\"></td>\n"; 
-			}  
-	      echo "    <td>$comment</td>\n"; 
-	   echo "  </tr>\n";   
+        {
+          if ($key=='Path')   echo "    <td><input type=$type size=20 maxlength=255 name='opt_".$key."' value=\"".stripslashes2($_POST["opt_".$key], '"$\\') ."\"></td>\n"; 
+        else
+          echo "    <td><input type=$type size=20 maxlength=255 name='opt_".$key."' value=\"".$_POST["opt_".$key]."\"></td>\n"; 
+      }  
+        echo "    <td>$comment</td>\n"; 
+     echo "  </tr>\n";   
   
     } 
   } 
-  echo "<tr ><td colspan=4 style='text-align: center;font-family: tahoma; font-size: 12px;font-weight: bold;background-color: #FFD700;'>Р’РµСЂСЃРёСЏ РџРћ: 1.90</td></tr>\n";	 
+  echo "<tr ><td colspan=4 style='text-align: center;font-family: tahoma; font-size: 12px;font-weight: bold;background-color: #FFD700;'>Версия ПО: 1.90</td></tr>\n";  
   
   echo "  </table>\n"; 
   echo "<br>\n"; 
-  echo "  <input type=button value='РР·РјРµРЅРёС‚СЊ' name=go onclick='validator(elements[4].value,elements[5].value,elements[6].value,elements[7].value)'></center>\n"; 
+  echo "  <input type=button value='Изменить' name=go onclick='validator(elements[4].value,elements[5].value,elements[6].value,elements[7].value)'></center>\n"; 
   echo "</center>\n</form>\n"; 
- $val="РџСЂРѕРІРµСЂРёС‚СЊ";
+ $val="Проверить";
   echo "<center><form name='validate' action='".$_SERVER['PHP_SELF']."?tab=".$tab."' method=post target=\"_self\">\n"; 
   echo " <input type='submit' name='check' value='".$val."' style='word-break: keep-all; word-wrap: normal;'>\n"; 
     echo "</center>\n</form>\n"; 
@@ -236,44 +235,44 @@ $tab=$_GET['tab'];
   } // function ReturnDefinedQuery($pattern) 
 ?> 
 <?php 
-   // РЎС‡РёС‚Р°РµРј СЃС‚СЂРѕРєРё РґР»СЏ СЃСЂР°РІРЅРµРЅРёСЏ 
-    $file = file($filename)      or die("РќРµРІРѕР·РјРѕР¶РЅРѕ РїСЂРѕС‡РёС‚Р°С‚СЊ С„Р°Р№Р» РЅР°СЃС‚СЂРѕРµРє!"); 
-      // РћС‚РєСЂРѕРµРј С„Р°Р№Р» РЅР° Р·Р°РїРёСЃСЊ 
-    $fh = fopen($filename,"w")   or die("РќРµРІРѕР·РјРѕР¶РЅРѕ РїСЂРѕС‡РёС‚Р°С‚СЊ С„Р°Р№Р» РЅР°СЃС‚СЂРѕРµРє!"); 
+   // Считаем строки для сравнения 
+    $file = file($filename)      or die("Невозможно прочитать файл настроек!"); 
+      // Откроем файл на запись 
+    $fh = fopen($filename,"w")   or die("Невозможно прочитать файл настроек!"); 
     $pars = ReturnDefinedQuery('opt_'); 
-      // РџРµСЂРµР±РµСЂРµРј РІСЃРµ СЃС‚СЂРѕРєРё С„Р°Р№Р»Р° 
+      // Переберем все строки файла 
     for($b=0;$b<count($file);$b++) 
     {      
       $str = $file[$b]; 
-        // Р•СЃР»Рё СЃС‚СЂРѕРєР° - РѕРїРёСЃР°РЅРёРµ РїР°СЂР°РјРµС‚СЂР° 
+        // Если строка - описание параметра 
       if(eregi($pat_param,$str)) 
       { 
         $fpars = Ini_Params_From_String($str); 
-        $key = $fpars[0]; // РРјСЏ РїР°СЂР°РјРµС‚СЂР° 
-        $comment = $fpars[2]; // РљРѕРјРјРµРЅС‚Р°СЂРёР№ Рє РїР°СЂР°РјРµС‚СЂСѓ 
-          // Р•СЃР»Рё РёРјСЏ РїР°СЂР°РјРµС‚СЂР° РЅР°РґРѕ РёР·РјРµРЅРёС‚СЊ 
+        $key = $fpars[0]; // Имя параметра 
+        $comment = $fpars[2]; // Комментарий к параметру 
+          // Если имя параметра надо изменить 
         if(array_key_exists($key,$pars)) 
         { 
           if($fpars[2] !== '') $fpars[2] = ';'.$fpars[2]; 
           $val = $pars[$key]; 
-            // Р•СЃР»Рё СЌС‚Рѕ СЃС‚СЂРѕРєРѕРІС‹Р№ РїР°СЂР°РјРµС‚СЂ... 
+            // Если это строковый параметр... 
           if(!is_numeric($val)) 
           { 
-              // Р’С‹СЂРµР¶РµРј Р»РёС€РЅРёРµ СЃР»РµС€Рё... 
+              // Вырежем лишние слеши... 
            // $val = stripslashes($val); 
-              // Р—Р°РјРµРЅРёРј РґРІРѕР№РЅС‹Рµ РєР°РІС‹С‡РєРё РѕРґРёРЅР°СЂРЅС‹РјРё 
+              // Заменим двойные кавычки одинарными 
             $val = str_replace('"',"'",$val); 
-              // Р Р°СЃРєРѕРґРёСЂСѓРµРј СЃС‚СЂРѕРєСѓ РїРѕСЃР»Рµ РїРµСЂРµРґР°С‡Рё  РµРµ Р±СЂР°СѓР·РµСЂРѕРј Рё РїРѕСЃС‚Р°РІРёРј РЅР° РµРµ РєСЂР°СЏС… РґРІРѕР№РЅС‹Рµ РєР°РІС‹С‡РєРё 
+              // Раскодируем строку после передачи  ее браузером и поставим на ее краях двойные кавычки 
             $val = '"'.UrlDecode($val).'"'; 
           } 
-            // РЎРѕСЃС‚Р°РІРёРј СЃС‚СЂРѕРєСѓ 
+            // Составим строку 
           $file[$b] = $fpars[0]." = ".$val.$fpars[2]."\n"; 
         } 
       } 
-       // Р—Р°РїРёС€РµРј СЃС‚СЂРѕРєСѓ РІ С„Р°Р№Р» 
+       // Запишем строку в файл 
       fwrite($fh,$file[$b]); 
     } 
-      // Р—Р°РєСЂРѕРµРј С„Р°Р№Р» 
+      // Закроем файл 
     fclose($fh); 
 ?>
 </body>

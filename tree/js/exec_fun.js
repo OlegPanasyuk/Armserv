@@ -30,7 +30,9 @@ function defineID(i_id,p_id,lvl,node,obj,addr,i_name,znum)
 {
 	parent.testFn(node,obj,addr,lvl);
 	try {
-		parent.frSheet.document.getElementById("content").style.display="none";
+		//parent.frSheet.document.getElementById("content").style.display="none";
+		parent.frSheet.checkID();
+		parent.frSheet.document.topmenu.submit();
 	}
 	catch (e) {
 		

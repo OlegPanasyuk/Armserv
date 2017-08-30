@@ -70,8 +70,10 @@ $maxp = $_GET["maxp"];
 $n_obj = $_GET["nobj"];
 $adr = $_GET["adr"];
 $edizm = $_GET["edizm"];
+$parentframe = $_GET["parentframe"];
 if (!isset($date_1)) $date_1=$dc;
 if (!isset($pw_en)) $pw_en=$disp;
+
 
  $type_izm = array();
  $pwr = array();
